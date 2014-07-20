@@ -1,0 +1,57 @@
+{
+    "name": "angus",
+    "version": "0.1.0",
+    "homepage": "http://nickjanssen.github.io/angus",
+    "author": "Nick Janssen <info@nickjanssen.com> (http://nickjanssen.com/)",
+    "license": "MIT",
+    "description": "Scaffolding tool for building AngularJS apps.",
+    "bugs": "https://github.com/nickjanssen/angus/issues",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:nickjanssen/angus.git"
+    },
+    "engines": {
+        "node": ">=0.10.0",
+        "npm": ">=1.2.10"
+    },
+    "keywords": [
+        "angular",
+        "angularjs",
+        "yeoman-generator",
+        "yeoman",
+        "web",
+        "app",
+        "front-end",
+        "bootstrap",
+        "firebase",
+        "h5bp",
+        "modernizr",
+        "jquery",
+        "grunt"
+    ],
+    "dependencies": {},
+    "devDependencies": {
+        "grunt": "~0.4.5",
+        "grunt-contrib-uglify": "~0.5.0",
+        "grunt-contrib-jshint": "~0.10.0",
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-contrib-concat": "~0.4.0",
+        "load-grunt-tasks": "~0.6.0",
+        "grunt-contrib-copy": "~0.5.0",
+        "grunt-contrib-clean": "~0.5.0",
+        "connect-livereload": "^0.4.0",
+        "grunt-contrib-connect": "^0.8.0",
+        "grunt-include-source": "^0.3.9",
+        "grunt-replace": "^0.7.8",
+        "grunt-ngmin": "0.0.3",
+        "grunt-html2js": "^0.2.8",
+        "connect-modrewrite": "^0.7.6",
+        "grunt-ng-constant": "^0.5.0",
+        "sass-import-compiler": "0.0.4",
+        "underscore": "^1.6.0",
+        "grunt-contrib-sass": "^0.7.3",
+        "walkdir": "0.0.7",
+        "nconf": "^0.6.9",
+        "connect": "~2.21.1"
+    }
+}

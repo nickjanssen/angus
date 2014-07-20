@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="hello-world">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Hello World</title>
+
+    <!-- include: "type": "css", "files": "./**/*.css" -->
+
+</head>
+<body ng-controller="MainController">
+
+    <h1>{{ welcome }}</h1>
+
+    <!-- include: "type": "js", "files": ["./assets/js/lib/**/*.js","./assets/js/templates/**/*.js"], "ordering": "top-down" -->
+    <!-- include: "type": "js", "files": ["./assets/js/app/**/*.js"], "ordering": "top-down" -->
+</body>
+</html>
