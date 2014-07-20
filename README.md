@@ -1,4 +1,6 @@
-**Angus** is a scaffolding tool for building AngularJS apps.
+Angus
+=====
+A scaffolding tool for building AngularJS apps.
 
 ## Why?
 
