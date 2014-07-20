@@ -33,21 +33,28 @@ Angus specifically focuses on AngularJS, as this framework tends to have a lot o
 # Quick start
 
 Clone this repository somewhere.
+
 ```git clone git@github.com:nickjanssen/angus.git```
 
 Enter the repo folder:
+
 ```cd angus```
 
 Install NPM dependencies:
+
 ```npm install```
 
 Install Angular using Bower:
+
 ```bower install angular```
 
 Run the Hello World app:
+
 ```grunt dev```
 
-Open your browser and navigate to ```http://localhost:9000/```
+Open your browser and navigate to 
+
+```http://localhost:9000/```
 
 ### How to use it?
 Internally Angus uses grunt to do all the work. There are two important commands:
