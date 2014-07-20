@@ -14,7 +14,8 @@ nconf.argv()
 
 // if not provided use these values
 nconf.defaults({
-    app: 'hello-world'
+    app: 'hello-world',
+    port: 9000,
 });
 
 // send this configured reference

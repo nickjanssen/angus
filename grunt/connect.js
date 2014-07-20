@@ -6,13 +6,15 @@ var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
 
+var buildConfig = require('../nconf.js');
+
 //MODIFIED: add require for connect-modewrite
 var modRewrite = require('connect-modrewrite');
 
 module.exports = {
     dev: {
         options: {
-            port: 9001,
+            port: buildConfig.get('port'),
             base: 'dist/dev/',
             // change this to '0.0.0.0' to access the server from outside
             hostname: '*',
