@@ -41,6 +41,9 @@ Enter the repo folder:
 Install NPM dependencies:
 `npm install`
 
+Install Angular using Bower:
+`bower install angular`
+
 Run the Hello World app:
 `grunt dev`
 
