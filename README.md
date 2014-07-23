@@ -33,7 +33,7 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 * Auto refresh on save
 * Easily define libraries (likely bower) your app is using
 * Automatically includes javascript, html templates and scss/css, both app specific and library includes in your `index.html`
-* Easily make a deployment build using `grunt prod` (minified and concatenated)
+* Easily make a production build using `grunt prod` (minified and concatenated)
 
 ## Why Grunt? There's Gulp and Brunch out there!
 
@@ -94,7 +94,9 @@ Focus on building your app, let Angus take care of the rest.
 
 ## Bower
 
-Bower is used to install and maintain frontend dependencies. Instead of the lengthy `bower_components` these are placed inside a `lib/` folder. The idea behind this change, is that it allows you to add custom libraries that do not necessarily need to be open-source, but still form part of the library of your personalised Angus installation.
+Bower is used to install and maintain frontend dependencies. Instead of the lengthy `bower_components` these are placed inside a `lib/` folder. The idea behind this change, is that it allows you to add custom libraries that do not necessarily need to be open-source, but still form part of the library of your Angus installation.
+
+The `lib/` folder is ignored by git, and you can everything in here that you wish. Note that Angus doesn't use a `bower.json` either. The `lib/` folder should be seen as the place to store all your shared code, whether private or installed using bower or other means.
 
 Everything else is the same. Simply add packages using `bower install <package>` and they will be placed inside `lib/`
 
@@ -103,8 +105,6 @@ Everything else is the same. Simply add packages using `bower install <package>`
 Apps are contained within the `src/` folder. Each app has its own folder. They are structured this way:
 ```
 angus/
-    grunt/
-    lib/
     src/
         hello-world/
             assets/
