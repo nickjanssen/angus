@@ -9,7 +9,8 @@ module.exports = {
             'src/<%= cfg.app %>/**/*',
             '!dist/**/*',
             '!grunt/**/*',
-            '!node_modules/**/*'
+            '!node_modules/**/*',
+            '!src/<%= cfg.app %>/**/_*'
         ],
         tasks: ['build_dev']
     },

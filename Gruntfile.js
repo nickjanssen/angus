@@ -1,8 +1,11 @@
 'use strict';
 
+var _ = require('underscore');
+var fs = require('fs');
 var walkDir = require('walkdir');
 var path = require('path');
 var buildConfig = require('./nconf.js');
+
 
 module.exports = function (grunt) {
 
@@ -30,6 +33,17 @@ module.exports = function (grunt) {
     });
 
     grunt.log.writeln('Looks good.');
+
+    // Check that all libIncludes given for this app exist
+    _.union(appConfig.libIncludes.js,
+        _.pluck(appConfig.libIncludes.tpl, 'libPath'),
+        appConfig.libIncludes.scss).forEach(function (file) {
+        if (!fs.existsSync('lib/' + file)) {
+            grunt.fail.warn('src/' +
+                buildConfig.get('app') + '/config.js: libIncludes: lib/' + file + ' does not exist!');
+        }
+    });
+
 
     var taskConfig = {
         pkg: grunt.file.readJSON('package.json'),

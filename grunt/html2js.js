@@ -1,12 +1,20 @@
 'use strict';
 
+var _ = require('underscore');
+
 // Only include templates from libs we are actually using
 var buildConfig = require('../nconf.js');
 var appConfig = require('../src/' + buildConfig.get('app') + '/config.js');
-var libTemplates = appConfig.libIncludes.templates
+var libTemplates = appConfig.libIncludes.tpl
 .map(function (lib) {
-    return 'lib/' + lib;
+    return 'lib/' + lib.libPath;
 });
+
+var libRename = function (moduleName) {
+    return _.find(appConfig.libIncludes.tpl, function (template) {
+        return template.libPath === moduleName;
+    }).readAs;
+};
 
 module.exports = {
     options: {
@@ -18,6 +26,7 @@ module.exports = {
         options: {
             // custom options, see below
             module: 'templates_lib',
+            rename: libRename,
             base: 'lib/'
         },
         src: libTemplates,
@@ -33,6 +42,7 @@ module.exports = {
         options: {
             // custom options, see below
             module: 'templates_lib',
+            rename: libRename,
             base: 'lib/'
         },
         src: libTemplates,

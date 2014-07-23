@@ -26,9 +26,17 @@ It also tries to instill the best practices of web app development. It comes wit
 
 Angus is just a simple scaffolding framework, where you build apps inside of the Angus repository. Every app is a directory inside the `src/` folder. Each app you make with Angus shares the same Gruntfile, but can define all the libraries they need on a per-app level.
 
-## AngularJS
+## Why Grunt? There's Gulp, and even Brunch out there!
 
-Angus specifically focuses on AngularJS, as this framework tends to have a lot of reusable components available, and lets you easily write reusable stuff using its module system.
+If you want the very latest, bleeding edge (and usually unstable) technology and you love Chrome Canary, this is probably not for you. Angus is made specifically to help you build and ship stable web apps ***today***. Grunt has stood the test of time and has a huge ecosystem of plugins available.
+
+## Features
+
+* Integrated connect server with pushState support
+* Auto refresh on save
+* Easily define (likely bower) libraries your app is using
+* Automatically includes javascript, html templates and scss/css, both app specific and library includes in your `index.html`
+* Easily make a deployment build using `grunt prod` (minified and concatenated)
 
 # Quick start
 
@@ -105,7 +113,7 @@ angus/
             components/ <-- (recommended for best practices)
             app.js
             config.js
-            constants.js  <-- GENERATED
+            _constants.js  <-- GENERATED
             index.html
 
 ```
@@ -118,10 +126,10 @@ This file is the heart of your app and defines Javascript and CSS/SCSS dependenc
 
 It contains a few variables:
 #### `libIncludes`
-Contains a `js`, `templates` and `scss` array of libraries. These check inside the `lib/` folder of Angus. They will be included automatically in your app.
+Contains a `js`, `tpl` and `scss` array of libraries. These check inside the `lib/` folder of Angus. They will be included automatically in your app.
 
 #### `constants`
-Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `constants.js` in the root of your app folder which contains these definitions.
+Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `_constants.js` in the root of your app folder which contains these definitions.
 
 #### `gruntTasks`
 An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them.
@@ -139,13 +147,13 @@ module.exports = {
         // e.g. 'angular-ui/src/modal/modal.js',
         js: [],
 
-        // Templates are an array of objects, to deal with html2js caching
+        // HTML Templates are an array of objects, to deal with html2js caching
         // e.g.
         // {
         //     libPath: 'angular-ui/template/modal/backdrop.html',
         //     readAs: 'template/modal/backdrop.html'
         // }
-        templates: [],
+        tpl: [],
 
         // e.g. 'bootstrap-sass-official/assets/stylesheets/bootstrap.scss',
         scss: []

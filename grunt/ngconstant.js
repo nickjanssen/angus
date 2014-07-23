@@ -18,7 +18,7 @@ module.exports = {
     ngconstant: {
         options: {
             name: 'constants',
-            dest: 'src/<%= cfg.app %>/constants.js',
+            dest: 'src/<%= cfg.app %>/_constants.js',
             constants: constants
         }
     }

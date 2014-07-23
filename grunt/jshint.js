@@ -2,11 +2,12 @@
 
 module.exports = {
     files: [
-        '**/*.js',
-        '!dist/**/*',
-        '!node_modules/**/*',
-        '!lib/**/*',
-        '!src/**/constants.js',
+        '*.js',
+        'src/<%= cfg.app %>/**/*.js',
+        '!dist/**/*.js',
+        '!node_modules/**/*.js',
+        '!lib/**/*.js',
+        '!src/<%= cfg.app %>/**/_*.js'
     ],
     options: {
         jshintrc: '.jshintrc',
