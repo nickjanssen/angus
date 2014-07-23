@@ -1,12 +1,11 @@
 'use strict';
 
-var path = require('path');
-
 // Only include templates from libs we are actually using
 var buildConfig = require('../nconf.js');
-var libTemplates = require('../src/' + buildConfig.get('app') + '/config.js').includes.js
+var appConfig = require('../src/' + buildConfig.get('app') + '/config.js');
+var libTemplates = appConfig.libIncludes.templates
 .map(function (lib) {
-    return path.dirname('lib/' + lib) + '/**/*.tpl.html';
+    return 'lib/' + lib;
 });
 
 module.exports = {

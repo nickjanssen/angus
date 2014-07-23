@@ -15,6 +15,22 @@ module.exports = function (grunt) {
             buildConfig.get('app') + ')');
     }
 
+    var appConfig = require('./src/' + buildConfig.get('app') + '/config.js');
+
+    grunt.log.writeln('Checking config.js of ' +
+            buildConfig.get('app'));
+
+    // Do config checks
+    var validate = require('jsonschema').validate;
+    var result = validate(appConfig, require('./app.config.json'));
+
+    result.errors.forEach(function (error) {
+        grunt.fail.warn(error.stack.replace('instance.', 'src/' +
+            buildConfig.get('app') + '/config.js: '));
+    });
+
+    grunt.log.writeln('Looks good.');
+
     var taskConfig = {
         pkg: grunt.file.readJSON('package.json'),
         cfg: buildConfig.get()
@@ -30,7 +46,15 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('sass-import-compiler');
 
-    grunt.registerTask('test', ['jshint']);
+    var appTaskFilter = function (entry) {
+        var found = false;
+        appConfig.gruntTasks.forEach(function (task) {
+            if (entry.indexOf(task) !== -1) {
+                found = true;
+            }
+        });
+        return found;
+    };
 
     grunt.registerTask('build_dev', [
         'jshint',
@@ -43,7 +67,7 @@ module.exports = function (grunt) {
         'sass_import_compiler',
         'sass:dev',
         'includeSource:dev'
-    ]);
+    ].filter(appTaskFilter));
 
     grunt.registerTask('build_prod', [
         'jshint',
@@ -58,7 +82,7 @@ module.exports = function (grunt) {
         'ngmin:prod',
         'uglify:prod',
         'includeSource:prod'
-    ]);
+    ].filter(appTaskFilter));
 
     grunt.registerTask('dev', [
         'build_dev',

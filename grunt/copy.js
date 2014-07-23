@@ -28,7 +28,7 @@ module.exports = {
                 expand: true,
                 // flatten: true,
                 cwd: 'lib/',
-                src: require('../src/' + buildConfig.get('app') + '/config.js').includes.js,
+                src: require('../src/' + buildConfig.get('app') + '/config.js').libIncludes.js,
                 dest: './dist/dev/assets/js/lib/'
             },
             {

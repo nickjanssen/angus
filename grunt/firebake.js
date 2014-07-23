@@ -1,13 +1,13 @@
 'use strict';
 
 var buildConfig = require('../nconf.js');
-var siteConfig = require('../src/' + buildConfig.get('app') + '/config.js');
+var appConfig = require('../src/' + buildConfig.get('app') + '/config.js');
 
 module.exports = {
     options: {
-        baseUrl: siteConfig.constants.firebaseConfig ?
-            siteConfig.constants.firebaseConfig.url : '',
-        targets: siteConfig.firebakeTargets,
+        baseUrl: appConfig.constants.firebaseConfig ?
+            appConfig.constants.firebaseConfig.url : '',
+        targets: appConfig.firebakeTargets,
         dest: 'src/' + buildConfig.get('app') + '/assets/firebaked.json'
     }
 };

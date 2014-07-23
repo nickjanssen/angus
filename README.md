@@ -47,17 +47,12 @@ Install NPM dependencies:
 npm install
 ```
 
-Install Angular using Bower:
-```
-bower install angular
-```
-
 Run the Hello World app:
 ```
 grunt dev
 ```
 
-Open your browser and navigate to 
+Open your browser and navigate to
 ```
 http://localhost:9000/
 ```
@@ -69,19 +64,19 @@ Internally Angus uses grunt to do all the work. There are two important commands
 Builds and serves a configured app for **development**. Files will not be minified nor concatenated.
 
 ### `grunt prod [--app=YOURAPP]`
-Builds and serves a configured app for **production**. Files will be minified and concatenated. 
+Builds and serves a configured app for **production**. Files will be minified and concatenated.
 
 For both commands, you can find the built files inside the `dist/` folder.
-You can also use the `app` parameter to specify an app to built, which is the name of a folder inside `src/`. 
+You can also use the `app` parameter to specify an app to built, which is the name of a folder inside `src/`.
 
 ### `config.json`
 If no `app` parameter is given, a `config.json` file in the root folder of Angus is checked. The file can contain these values:
-``` 
+```
 {
     "app": "hello-world",
     "port": 9001
 }
-``` 
+```
 
 ### How does it work?
 Angus has  a `src/` folder which contains all your apps, including the example `hello-world`. The `src/` folder is ignored by git, and you can safely have sub-repositories inside. These sub-repositories are actual apps without all the extra files such as `Gruntfile.js`, `.jshintrc`, `package.json` etc, as these are maintained on a higher level.
@@ -97,41 +92,93 @@ Everything else is the same. Simply add packages using `bower install <package>`
 ## Apps
 
 Apps are contained within the `src/` folder. Each app has its own folder. They are structured this way:
+```
+angus/
+    grunt/
+    lib/
+    src/
+        hello-world/
+            assets/
+            scss/
+                _includes.scss <-- GENERATED
+                main.scss
+            components/ <-- (recommended for best practices)
+            app.js
+            config.js
+            constants.js  <-- GENERATED
+            index.html
+
+```
+
+### `app.js`
+Your AngularJS starting point. Here is where you define your app's module and its dependencies.
 
 ### `config.js`
 This file is the heart of your app and defines Javascript and CSS/SCSS dependencies. It is a `.js` and not a `.json` file on purpose, to allow you to add comments and optionally more complex logic.
 
 It contains a few variables:
-#### `includes`
-Contains a `js` and `scss` array of libraries. These check inside the `lib/` folder of Angus. They will be included automatically in your app.
+#### `libIncludes`
+Contains a `js`, `templates` and `scss` array of libraries. These check inside the `lib/` folder of Angus. They will be included automatically in your app.
 
 #### `constants`
 Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `constants.js` in the root of your app folder which contains these definitions.
 
+#### `gruntTasks`
+An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them.
+
 Example `config.js` file:
 ```
 module.exports = {
-    includes: {
-        js: [
-            'angular-file-upload/angular-file-upload.js'
-        ],
-        scss: [
-            'bootstrap-sass-official/assets/stylesheets/bootstrap'
-        ]
+
+    // These files are put in the /lib folder.
+    // Angus will look for files defined here in this folder include them in your app.
+    // You can install components using Bower, but you can also add
+    // custom closed source libraries here.
+    libIncludes: {
+
+        // e.g. 'angular-ui/src/modal/modal.js',
+        js: [],
+
+        // Templates are an array of objects, to deal with html2js caching
+        // e.g.
+        // {
+        //     libPath: 'angular-ui/template/modal/backdrop.html',
+        //     readAs: 'template/modal/backdrop.html'
+        // }
+        templates: [],
+
+        // e.g. 'bootstrap-sass-official/assets/stylesheets/bootstrap.scss',
+        scss: []
     },
-    constants: {
-        'firebaseConfig': {
-            'url': 'https://myapp.firebaseio.com/',
-        }
-    }
+
+    // A list of grunt tasks to use, in any order. Angus will have many tasks
+    // predefined in the right order, you simple need to enable them here.
+    gruntTasks: [
+        'clean',
+        'concat',
+        'copy',
+        'html2js',
+        'includeSource',
+        'jshint',
+        'ngconstant',
+        'ngmin',
+        'replace',
+        'sass',
+        'sass_import_compiler',
+        'uglify'
+    ],
+
+    // ngconstant will parse this object and allow you to access them in your app
+    constants: {}
 };
+
 ```
 
 ### `assets/`
 Contains all images, videos, JSON files and other data which are static to your app.
 
 ### `scss/`
-The folder for your sass files. 
+The folder for your sass files.
 
 One special note: the `scss/` folder also contains an `_includes.scss` file which gets auto generated. This file contains all Sass library definitions you have put inside `config.js`.
 

@@ -1,0 +1,56 @@
+{
+    "id": "/AppConfig",
+    "type": "object",
+    "required": true,
+    "properties": {
+        "libIncludes": {
+            "type": "object",
+            "required": true,
+            "properties": {
+                "js": {
+                    "type": "array",
+                    "required": true,
+                    "items": {
+                        "type": "string",
+                        "required": true
+                    }
+                },
+                "templates": {
+                    "type": "array",
+                    "required": true,
+                    "items": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "libPath": {
+                                "type": "string",
+                                "required": true
+                            },
+                            "readAs": {
+                                "type": "string",
+                                "required": true
+                            }
+                        }
+                    }
+                },
+                "scss": {
+                    "type": "array",
+                    "required": true,
+                    "items": {
+                        "type": "string",
+                        "required": true
+                    }
+                }
+            }
+        },
+        "gruntTasks": {
+            "type": "array",
+            "required": true
+        },
+        "constants": {
+            "type": "object",
+            "required": true,
+            "properties": {}
+        }
+    }
+}

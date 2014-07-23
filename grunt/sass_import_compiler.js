@@ -1,7 +1,7 @@
 'use strict';
 
 var buildConfig = require('../nconf.js');
-var libScss = require('../src/' + buildConfig.get('app') + '/config.js').includes.scss
+var libScss = require('../src/' + buildConfig.get('app') + '/config.js').libIncludes.scss
 .map(function (lib) {
     return 'lib/' + lib;
 });
