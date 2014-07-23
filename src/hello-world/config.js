@@ -17,7 +17,7 @@ module.exports = {
         //     libPath: 'angular-ui/template/modal/backdrop.html',
         //     readAs: 'template/modal/backdrop.html'
         // }
-        templates: [],
+        tpl: [],
 
         // e.g. 'bootstrap-sass-official/assets/stylesheets/bootstrap.scss',
         scss: []

@@ -14,7 +14,7 @@ module.exports = {
             style: 'compressed'
         },
         files: {
-            'dist/prod/assets/app.css': 'src/<%= cfg.app %>/scss/_includes.scss'
+            'dist/prod/assets/app.css': 'src/<%= cfg.app %>/scss/app.scss'
         }
     }
 };
