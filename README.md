@@ -26,17 +26,18 @@ It also tries to instill the best practices of web app development. It comes wit
 
 Angus is just a simple scaffolding framework, where you build apps inside of the Angus repository. Every app is a directory inside the `src/` folder. Each app you make with Angus shares the same Gruntfile, but can define all the libraries they need on a per-app level.
 
-## Why Grunt? There's Gulp, and even Brunch out there!
-
-If you want the very latest, bleeding edge (and usually unstable) technology and you love Chrome Canary, this is probably not for you. Angus is made specifically to help you build and ship stable web apps ***today***. Grunt has stood the test of time and has a huge ecosystem of plugins available.
-
 ## Features
 
++ One Gruntfile for all your apps
 * Integrated connect server with pushState support
 * Auto refresh on save
-* Easily define (likely bower) libraries your app is using
+* Easily define libraries (likely bower) your app is using
 * Automatically includes javascript, html templates and scss/css, both app specific and library includes in your `index.html`
 * Easily make a deployment build using `grunt prod` (minified and concatenated)
+
+## Why Grunt? There's Gulp and Brunch out there!
+
+If you want the very latest, bleeding edge (and usually unstable) technology and you love Chrome Canary, this is probably not for you. Angus is made specifically to help you build and ship stable web apps **today**. Grunt has stood the test of time and has a huge amount of plugins available.
 
 # Quick start
 
