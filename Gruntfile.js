@@ -71,13 +71,14 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build_prod', [
         'jshint',
+        'ngconstant',
         'clean:prod',
         'copy:prod',
         'replace:prod',
-        'sass_import_compiler',
-        'sass:prod',
         'html2js:libProd',
         'html2js:prod',
+        'sass_import_compiler',
+        'sass:prod',
         'concat:prod',
         'ngmin:prod',
         'uglify:prod',
