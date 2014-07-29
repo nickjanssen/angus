@@ -6,8 +6,8 @@ module.exports = {
             src: [
                 'app.min.js'
             ],
-            cwd: 'dist/prod/assets/',
-            dest: 'dist/prod/assets/',
+            cwd: 'dist/prod/assets/js/app/',
+            dest: 'dist/prod/assets/js/app/',
             expand: true
         }]
     }
