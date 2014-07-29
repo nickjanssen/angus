@@ -54,6 +54,7 @@
     "grunt-contrib-sass": "^0.7.3",
     "walkdir": "0.0.7",
     "nconf": "^0.6.9",
-    "connect": "~2.21.1"
+    "connect": "~2.21.1",
+    "grunt-s3": "^0.2.0-alpha.3"
   }
 }

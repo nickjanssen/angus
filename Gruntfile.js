@@ -47,7 +47,8 @@ module.exports = function (grunt) {
 
     var taskConfig = {
         pkg: grunt.file.readJSON('package.json'),
-        cfg: buildConfig.get()
+        cfg: buildConfig.get(),
+        appcfg: appConfig
     };
 
     walkDir.sync('./grunt/', function (filePath) {

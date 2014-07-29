@@ -6,7 +6,7 @@ module.exports = {
     },
     prod: {
         files: {
-            './dist/prod/assets/app.min.js': ['<%= concat.prod.dest %>']
+            '<%= concat.prod.dest %>': ['<%= concat.prod.dest %>']
         }
     }
 };
