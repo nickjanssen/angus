@@ -111,4 +111,9 @@ module.exports = function (grunt) {
         'connect:prod',
         'watch:dummy'
     ]);
+
+    grunt.registerTask('deploy_s3', [
+        'build_prod',
+        's3'
+    ]);
 };
