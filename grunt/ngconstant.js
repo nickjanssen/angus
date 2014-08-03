@@ -2,19 +2,10 @@
 
 var buildConfig = require('../nconf.js');
 var _ = require('underscore');
-var fs = require('fs');
 
 var constants = {};
 
 _.extend(constants, require('../src/' + buildConfig.get('app') + '/config.js').constants);
-
-var firebaked = {};
-if (fs.existsSync('src/' + buildConfig.get('app') + '/assets/firebaked.json')) {
-    firebaked = require('../src/' + buildConfig.get('app') + '/assets/firebaked.json');
-}
-_.extend(constants, {
-    'firebaked': firebaked
-});
 
 module.exports = {
     ngconstant: {

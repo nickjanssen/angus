@@ -27,7 +27,7 @@ module.exports = {
             {
                 expand: true,
                 // flatten: true,
-                cwd: 'lib/',
+                cwd: 'bower_components/',
                 src: require('../src/' + buildConfig.get('app') + '/config.js').libIncludes.js,
                 dest: './dist/dev/assets/js/lib/'
             },

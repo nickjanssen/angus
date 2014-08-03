@@ -4,7 +4,7 @@ var buildConfig = require('../nconf.js');
 
 var additionalLibs = require('../src/' + buildConfig.get('app') + '/config.js').libIncludes.js
 .map(function (lib) {
-    return 'lib/' + lib;
+    return 'bower_components/' + lib;
 });
 
 module.exports = {

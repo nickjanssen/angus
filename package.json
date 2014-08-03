@@ -56,6 +56,8 @@
     "nconf": "^0.6.9",
     "connect": "~2.21.1",
     "grunt-s3": "^0.2.0-alpha.3",
-    "grunt-img": "^0.1.8"
+    "grunt-img": "^0.1.8",
+    "execSync": "^1.0.1-pre",
+    "colors": "^0.6.2"
   }
 }

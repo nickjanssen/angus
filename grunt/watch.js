@@ -37,7 +37,8 @@ module.exports = {
             livereload: 35730
         },
         files: [
-            'src/<%= cfg.app %>/scss/**/*'
+            'src/<%= cfg.app %>/scss/**/*',
+            '!src/<%= cfg.app %>/**/_*'
         ],
         tasks: ['sass:dev']
     },
@@ -46,7 +47,7 @@ module.exports = {
             livereload: 35730
         },
         files: [
-            'lib/**/*'
+            'bower_components/**/*'
         ],
         tasks: ['build_dev']
     },

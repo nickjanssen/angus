@@ -6,7 +6,7 @@ module.exports = {
         'src/<%= cfg.app %>/**/*.js',
         '!dist/**/*.js',
         '!node_modules/**/*.js',
-        '!lib/**/*.js',
+        '!bower_components/**/*.js',
         '!src/<%= cfg.app %>/**/_*.js'
     ],
     options: {

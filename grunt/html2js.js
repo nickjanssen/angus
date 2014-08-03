@@ -7,7 +7,7 @@ var buildConfig = require('../nconf.js');
 var appConfig = require('../src/' + buildConfig.get('app') + '/config.js');
 var libTemplates = appConfig.libIncludes.tpl
 .map(function (lib) {
-    return 'lib/' + lib.libPath;
+    return 'bower_components/' + lib.libPath;
 });
 
 var libRename = function (moduleName) {
@@ -27,7 +27,7 @@ module.exports = {
             // custom options, see below
             module: 'templates_lib',
             rename: libRename,
-            base: 'lib/'
+            base: 'bower_components/'
         },
         src: libTemplates,
         dest: 'dist/dev/assets/js/templates/templates_lib.js'
@@ -43,7 +43,7 @@ module.exports = {
             // custom options, see below
             module: 'templates_lib',
             rename: libRename,
-            base: 'lib/'
+            base: 'bower_components/'
         },
         src: libTemplates,
         dest: 'dist/tmp/templates_lib.js'

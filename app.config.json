@@ -3,6 +3,14 @@
     "type": "object",
     "required": true,
     "properties": {
+        "packages": {
+            "type": "array",
+            "required": true,
+            "items": {
+                "type": "string",
+                "required": true
+            }
+        },
         "libIncludes": {
             "type": "object",
             "required": true,
@@ -45,7 +53,9 @@
         },
         "gruntTasks": {
             "type": "array",
-            "required": true
+            "items": {
+                "type": "string"
+            }
         },
         "aws": {
             "type": "object",

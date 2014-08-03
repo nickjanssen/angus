@@ -5,44 +5,66 @@ var fs = require('fs');
 var walkDir = require('walkdir');
 var path = require('path');
 var buildConfig = require('./nconf.js');
-
+var sh = require('execSync');
 
 module.exports = function (grunt) {
+
+    var doChecks = _.some(grunt.cli.tasks, function (task) {
+        return task === 'dev' || task === 'prod';
+    });
 
     // Overwrite build target if present on the command line
     if (grunt.option('app')) {
         buildConfig.set('app', grunt.option('app'));
-    }
-    else {
-        grunt.log.writeln('No --app parameter given, using config.json (' +
-            buildConfig.get('app') + ')');
+    } else {
+        grunt.log.writeln(('No --app parameter given, using config.json (' +
+            buildConfig.get('app').bold + ')').cyan);
     }
 
     var appConfig = require('./src/' + buildConfig.get('app') + '/config.js');
 
-    grunt.log.writeln('Checking config.js of ' +
-            buildConfig.get('app'));
+    if (doChecks) {
+        grunt.log.writeln(('Checking config.js of ' +
+            buildConfig.get('app')).yellow);
 
-    // Do config checks
-    var validate = require('jsonschema').validate;
-    var result = validate(appConfig, require('./app.config.json'));
+        // Do config checks
+        var validate = require('jsonschema').validate;
+        var result = validate(appConfig, require('./app.config.json'));
 
-    result.errors.forEach(function (error) {
-        grunt.fail.warn(error.stack.replace('instance.', 'src/' +
-            buildConfig.get('app') + '/config.js: '));
-    });
+        result.errors.forEach(function (error) {
+            grunt.fail.fatal(error.stack.replace('instance.', 'src/' +
+                buildConfig.get('app') + '/config.js: '));
+        });
 
-    grunt.log.writeln('Looks good.');
+        grunt.log.writeln('Looks good.'.green);
+        grunt.log.writeln('Installing Bower packages...'.yellow);
 
-    // Check that all libIncludes given for this app exist
-    _.union(appConfig.libIncludes.js,
-        _.pluck(appConfig.libIncludes.tpl, 'libPath'),
-        appConfig.libIncludes.scss).forEach(function (file) {
-        if (!fs.existsSync('lib/' + file)) {
-            grunt.fail.warn('src/' +
-                buildConfig.get('app') + '/config.js: libIncludes: lib/' + file + ' does not exist!');
+        var packageCommands = appConfig.packages
+            .map(function (pkg) {
+                return 'bower uninstall ' + pkg + ' && bower install ' + pkg;
+            });
+
+        result = sh.exec(packageCommands.join(' && '));
+
+        if (result.code !== 0) {
+            grunt.fail.fatal(result.stdout);
         }
-    });
+
+        grunt.log.writeln('Packages installed.'.green);
+        grunt.log.writeln('Checking if any library includes are missing...'.yellow);
+
+        // Check that all libIncludes given for this app exist
+        _.union(appConfig.libIncludes.js,
+            _.pluck(appConfig.libIncludes.tpl, 'libPath'),
+            appConfig.libIncludes.scss).forEach(function (file) {
+            if (!fs.existsSync('bower_components/' + file)) {
+                grunt.fail.fatal('src/' +
+                    buildConfig.get('app') + '/config.js: libIncludes: bower_components/' + file + ' does not exist!');
+            }
+        });
+
+        grunt.log.writeln('All library includes were found.'.green);
+    }
 
 
     var taskConfig = {
@@ -63,7 +85,8 @@ module.exports = function (grunt) {
 
     var appTaskFilter = function (entry) {
         var found = false;
-        appConfig.gruntTasks.forEach(function (task) {
+        var gruntTasks = appConfig.gruntTasks || require('./angus/defaultTasks');
+        gruntTasks.forEach(function (task) {
             if (entry.indexOf(task) !== -1) {
                 found = true;
             }

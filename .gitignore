@@ -7,8 +7,8 @@ dist
 config.json
 *.sublime*
 
-lib/*
-!lib/keep.tmp
+bower_components/*
+!bower_components/keep.tmp
 
 src/*
 !src/hello-world/

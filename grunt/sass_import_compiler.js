@@ -3,7 +3,7 @@
 var buildConfig = require('../nconf.js');
 var libScss = require('../src/' + buildConfig.get('app') + '/config.js').libIncludes.scss
 .map(function (lib) {
-    return 'lib/' + lib;
+    return 'bower_components/' + lib;
 });
 
 module.exports = {
