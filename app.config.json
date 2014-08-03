@@ -47,6 +47,27 @@
             "type": "array",
             "required": true
         },
+        "aws": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "required": true
+                },
+                "secret": {
+                    "type": "string",
+                    "required": true
+                },
+                "bucket": {
+                    "type": "string",
+                    "required": true
+                },
+                "region": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
         "constants": {
             "type": "object",
             "required": true,
