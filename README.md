@@ -1,6 +1,9 @@
 Angus
 =====
-A scaffolding tool for building AngularJS apps.
+
+A scaffolding tool for building AngularJS apps. 
+
+![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
 ## Why?
 
