@@ -34,6 +34,8 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 * Easily define libraries (likely bower) your app is using
 * Automatically includes javascript, html templates and scss/css, both app specific and library includes in your `index.html`
 * Easily make a production build using `grunt prod` (minified and concatenated)
+* Deploy directly to Amazon S3
+* Serve static resources from a CDN on production
 
 ## Why Grunt? There's Gulp and Brunch out there!
 
@@ -134,6 +136,12 @@ Using `grunt-ng-constant` these variables are automatically included in your Ang
 
 #### `gruntTasks`
 An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them.
+
+#### `aws`
+If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `grunt deploy_s3` after you've set these up to deploy.
+
+#### `staticServerUrl`
+When given, angus will prepend all static resources with this URL on production. Common usecase is to upload your static files to a CDN (e.g. Amazon S3) and then add the URL of your bucket here.
 
 Example `config.js` file:
 ```
