@@ -13,7 +13,13 @@ module.exports = {
     prod: {
         options: {
             basePath: 'dist/prod/',
-            ordering: 'top-down'
+            ordering: 'top-down',
+            templates: {
+                html: {
+                    js: '<script src="<%= appcfg.staticServerUrl %>{filePath}"></script>',
+                    css: '<link rel="stylesheet" type="text/css" href="<%= appcfg.staticServerUrl %>{filePath}" />',
+                }
+            }
         },
         files: {
             'dist/prod/index.html': 'dist/prod/index.html'
