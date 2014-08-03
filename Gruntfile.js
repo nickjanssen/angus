@@ -109,7 +109,7 @@ module.exports = function (grunt) {
     grunt.registerTask('prod', [
         'build_prod',
         'connect:prod',
-        'watch:dummy'
+        'watch'
     ]);
 
     grunt.registerTask('deploy_s3', [

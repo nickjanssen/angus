@@ -50,23 +50,15 @@ module.exports = {
         ],
         tasks: ['build_dev']
     },
-    gruntfile: {
+    angus: {
         options: {
             livereload: 35730
         },
         files: [
+            'app.config.json',
             'Gruntfile.js',
             'grunt/**/*'
         ],
         tasks: ['build_dev']
-    },
-
-    // Dummy to prevent grunt from exiting when doing 'grunt prod'
-    dummy: {
-        options: {
-            livereload: 35730
-        },
-        files: [],
-        tasks: []
     }
 };
