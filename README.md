@@ -1,7 +1,7 @@
 Angus
 =====
 
-A scaffolding tool for building AngularJS apps. 
+A scaffolding framework for building web apps faster.
 
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
@@ -23,7 +23,7 @@ A workflow like this is prone to change often, yet it is often very similar acro
 
 ## Introducing Angus
 
-Angus solves these problems by turning the build process into something generic and reusable. It allows you to specify libraries on a per-app basis while still maintaining and updating them on a global level.
+Angus solves these problems by turning the build process into something generic and reusable. It allows you to specify libraries on a per-app basis, while still sharing the same build steps.
 
 It also tries to instill the best practices of web app development. It comes with the best configuration and tools for the job. The ultimate goal is to let you build apps without wasting time.
 
@@ -34,7 +34,7 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 + One Gruntfile for all your apps
 * Integrated connect server with pushState support
 * Auto refresh on save
-* Easily define libraries (likely bower) your app is using
+* Easily define libraries your app is using
 * Automatically includes javascript, html templates and scss/css, both app specific and library includes in your `index.html`
 * Easily make a production build using `grunt prod` (minified and concatenated)
 * Deploy directly to Amazon S3
@@ -42,7 +42,7 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 
 ## Why Grunt? There's Gulp and Brunch out there!
 
-If you want the very latest, bleeding edge (and usually unstable) technology and you love Chrome Canary, this is probably not for you. Angus is made specifically to help you build and ship stable web apps **today**. Grunt has stood the test of time and has a huge amount of plugins available.
+If you want the very latest, bleeding edge (and usually unstable) technology and you love Chrome Canary, this is probably not for you. Angus is made specifically to help you build and ship stable web apps **today**. Grunt has stood the test of time and has a huge number of plugins available.
 
 # Quick start
 
@@ -81,7 +81,7 @@ Builds and serves a configured app for **development**. Files will not be minifi
 Builds and serves a configured app for **production**. Files will be minified and concatenated.
 
 For both commands, you can find the built files inside the `dist/` folder.
-You can also use the `app` parameter to specify an app to built, which is the name of a folder inside `src/`.
+You can also use the `app` parameter to specify an app to  bebuilt, which is the name of a folder inside `src/`.
 
 ### `config.json`
 If no `app` parameter is given, a `config.json` file in the root folder of Angus is checked. The file can contain these values:
@@ -99,11 +99,12 @@ Focus on building your app, let Angus take care of the rest.
 
 ## Bower
 
-Bower is used to install and maintain frontend dependencies. Instead of the lengthy `bower_components` these are placed inside a `lib/` folder. The idea behind this change, is that it allows you to add custom libraries that do not necessarily need to be open-source, but still form part of the library of your Angus installation.
+Bower is used to install and maintain frontend dependencies. Angus doesn't use any `bower.json` files.
+Instead, when you run the `dev` or `prod` command, Angus will tell Bower which libraries to install for your app, before starting the build.
 
-The `lib/` folder is ignored by git, and you can place everything in here that you wish. Note that Angus doesn't use a `bower.json` either. The `lib/` folder should be seen as the place to store all your shared code, whether private, installed using bower or through other means.
+You define Bower libraries inside your `config.js` using the `packages` array.
 
-Everything else is the same. Simply add packages using `bower install <package>` from the root Angus folder and they will be placed inside `lib/`
+Most Bower packages contain different flavors of the actual library. These include a minified and/or production build, special feature builds as well libraries that are broken down into many smaller components, such as bootstrap. Using the `libIncludes` array, you can define which files you actually need from the Bower packages you install.
 
 ## Apps
 
@@ -116,7 +117,6 @@ angus/
             scss/
                 _includes.scss <-- GENERATED
                 main.scss
-            components/ <-- (recommended for best practices)
             app.js
             config.js
             _constants.js  <-- GENERATED
@@ -125,73 +125,69 @@ angus/
 ```
 
 ### `app.js`
-Your AngularJS starting point. Here is where you define your app's module and its dependencies.
+Your app's JavaScript starting point. If you're using AngularJS, this is where you define your app module and its dependencies.
 
 ### `config.js`
 This file is the heart of your app and defines Javascript and CSS/SCSS dependencies. It is a `.js` and not a `.json` file on purpose, to allow you to add comments and optionally more complex logic.
 
 It contains a few variables:
 #### `libIncludes`
-Contains a `js`, `tpl` and `scss` array of libraries. These check inside the `lib/` folder of Angus. They will be included automatically in your app.
+A list of bower dependencies this app will use. Each package will be installed using the command 'bower install <package>'
+Remember that you can also use git repo's, local folders, URL's and specify version and/or tags.
+Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info.
+
+#### `libIncludes`
+Contains a `js`, `tpl` and `scss` array of libraries. These look inside the `bower_components/` folder. They will be included automatically in your app.
 
 #### `constants`
-Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `_constants.js` in the root of your app folder which contains these definitions.
+Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `_constants.js` in the root of your app folder which contains these definitions. If you're not using AngularJS, include a `gruntTasks` variable in your config.js where you omit the `grunt-ng-constants` task.
 
-#### `gruntTasks`
+#### `gruntTasks` (optional)
 An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them.
 
-#### `aws`
+#### `aws` (optional)
 If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `grunt deploy_s3` after you've set these up to deploy.
 
-#### `staticServerUrl`
+#### `staticServerUrl` (optional)
 When given, angus will prepend all static resources with this URL on production. Common usecase is to upload your static files to a CDN (e.g. Amazon S3) and then add the URL of your bucket here.
 
 Example `config.js` file:
 ```
 module.exports = {
-
-    // These files are put in the /lib folder.
-    // Angus will look for files defined here in this folder include them in your app.
-    // You can install components using Bower, but you can also add
-    // custom closed source libraries here.
-    libIncludes: {
-
-        // e.g. 'angular-ui/src/modal/modal.js',
-        js: [],
-
-        // HTML Templates are an array of objects, to deal with html2js caching
-        // e.g.
-        // {
-        //     libPath: 'angular-ui/template/modal/backdrop.html',
-        //     readAs: 'template/modal/backdrop.html'
-        // }
-        tpl: [],
-
-        // e.g. 'bootstrap-sass-official/assets/stylesheets/bootstrap.scss',
-        scss: []
-    },
-
-    // A list of grunt tasks to use, in any order. Angus will have many tasks
-    // predefined in the right order, you simple need to enable them here.
-    gruntTasks: [
-        'clean',
-        'concat',
-        'copy',
-        'html2js',
-        'includeSource',
-        'jshint',
-        'ngconstant',
-        'ngmin',
-        'replace',
-        'sass',
-        'sass_import_compiler',
-        'uglify'
+    packages: [
+        'angular'
     ],
 
-    // ngconstant will parse this object and allow you to access them in your app
-    constants: {}
-};
+    libIncludes: {
 
+        js: [
+            'angular/angular.js'
+        ],
+
+        tpl: [
+            {
+                libPath: 'angular-ui/template/modal/backdrop.html',
+                readAs: 'template/modal/backdrop.html'
+            }
+        ]
+
+        scss: [
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_normalize.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_grid.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_modals.scss'
+        ]
+    },
+
+    constants: {
+        // In your app, you can inject myAppConfig and access its data
+        myAppConfig: {
+            articlesToShowPerPage: 20
+        }
+    }
+};
 ```
 
 ### `assets/`
@@ -203,7 +199,7 @@ The folder for your sass files.
 One special note: the `scss/` folder also contains an `_includes.scss` file which gets auto generated. This file contains all Sass library definitions you have put inside `config.js`.
 
 ### Final note
-I recommend that you add a `components` folder and structure your AngularJS files in there in a modularized fashion.
+If you're using AngularJS, I recommend that you add a `components` folder and structure your AngularJS files in there in a modularized fashion.
 Please see the [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub).
 
 ## License
