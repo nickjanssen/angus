@@ -32,6 +32,7 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 ## Features
 
 + One Gruntfile for all your apps
+* Framework independent
 * Integrated connect server with pushState support
 * Auto refresh on save
 * Easily define libraries your app is using
@@ -139,11 +140,17 @@ Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info
 #### `libIncludes`
 Contains a `js`, `tpl` and `scss` array of libraries. These look inside the `bower_components/` folder. They will be included automatically in your app.
 
-#### `constants`
-Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `_constants.js` in the root of your app folder which contains these definitions. If you're not using AngularJS, include a `gruntTasks` variable in your config.js where you omit the `grunt-ng-constants` task.
+#### `constants` (requires ngconstant task to be enabled)
+Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `_constants.js` in the root of your app folder which contains these definitions.
 
 #### `gruntTasks` (optional)
-An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them.
+An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them. If you leave these out, Angus will take a default list of tasks from `angus/defaultTasks.js`
+
+#### `gruntTasksAdd` (optional)
+In addition to the list of tasks you specified, either by the `gruntTasks` variable above or the default task list provided by Angus, also execute these tasks in addition.
+
+#### `gruntTasksIgnore` (optional)
+In the list of tasks you specified, either by the `gruntTasks` variable above or the default task list provided by Angus, ignore these tasks.
 
 #### `aws` (optional)
 If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `grunt deploy_s3` after you've set these up to deploy.
