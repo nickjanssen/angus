@@ -1,7 +1,7 @@
 Angus
 =====
 
-A scaffolding framework for building web apps faster.
+Pre-configured framework for fast web-app building.
 
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
