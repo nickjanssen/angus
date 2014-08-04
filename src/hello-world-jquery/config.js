@@ -7,7 +7,7 @@ module.exports = {
     // Remember that you can also use git repo's, local folders, URL's and specify version and/or tags
     // Please see http://bower.io/docs/api/#install for more info
     packages: [
-        'angular',
+        'http://code.jquery.com/jquery-2.1.0.min.js',
         'bootstrap-sass-official'
     ],
 
@@ -16,15 +16,9 @@ module.exports = {
     libIncludes: {
 
         js: [
-            'angular/angular.js'
+            'jquery-2.1.0.min/index.js'
         ],
 
-        // Templates are an array of objects, to deal with html2js caching
-        // e.g.
-        // {
-        //     libPath: 'angular-ui/template/modal/backdrop.html',
-        //     readAs: 'template/modal/backdrop.html'
-        // }
         tpl: [],
 
         scss: [
@@ -42,14 +36,14 @@ module.exports = {
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss',
             'bootstrap-sass-official/assets/stylesheets/bootstrap/_grid.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_tables.scss',
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss',
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss',
+            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss',
+            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss',
 
             // Components
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_component-animations.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_glyphicons.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_dropdowns.scss',
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss',
+            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss',
@@ -69,7 +63,7 @@ module.exports = {
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_close.scss',
 
             // Components w/ JavaScript
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_modals.scss'
+            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_modals.scss'
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_carousel.scss',

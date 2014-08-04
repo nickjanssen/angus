@@ -57,6 +57,18 @@
                 "type": "string"
             }
         },
+        "gruntTasksAdd": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "gruntTasksIgnore": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "aws": {
             "type": "object",
             "properties": {

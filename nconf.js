@@ -14,7 +14,7 @@ nconf.argv()
 
 // if not provided use these values
 nconf.defaults({
-    app: 'hello-world',
+    app: 'hello-world-angular',
     port: 9000,
 });
 

@@ -41,8 +41,9 @@ module.exports = function (grunt) {
 
         var packageCommands = appConfig.packages
             .map(function (pkg) {
-                return 'bower uninstall ' + pkg + ' && bower install ' + pkg;
+                return 'bower install ' + pkg;
             });
+        packageCommands.unshift('rm -rf bower_components');
 
         result = sh.exec(packageCommands.join(' && '));
 
@@ -86,6 +87,12 @@ module.exports = function (grunt) {
     var appTaskFilter = function (entry) {
         var found = false;
         var gruntTasks = appConfig.gruntTasks || require('./angus/defaultTasks');
+        if (appConfig.gruntTasksIgnore) {
+            gruntTasks = _.without(gruntTasks, appConfig.gruntTasksIgnore);
+        }
+        if (appConfig.gruntTasksAdd) {
+            gruntTasks = _.union(gruntTasks, appConfig.gruntTasksAdd);
+        }
         gruntTasks.forEach(function (task) {
             if (entry.indexOf(task) !== -1) {
                 found = true;

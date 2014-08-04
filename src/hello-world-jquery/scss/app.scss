@@ -1,0 +1,18 @@
+
+
+@import "includes";
+
+
+body {
+    font-family: Helvetica;
+}
+
+.container {
+    border-radius: 20px;
+    background-color: #e6d8a9;
+}
+
+.container__logo {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}

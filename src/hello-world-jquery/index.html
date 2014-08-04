@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="hello-world">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -9,17 +9,18 @@
     <!-- include: "type": "css", "files": "./**/*.css" -->
 
 </head>
-<body ng-controller="MainController">
+<body>
 
-
-
-    <div class="row">
-        <div class="col-md-6">
-            <h1>{{ welcome }}</h1>
-            <p>Hey there, thanks for checking out <a href="https://github.com/nickjanssen/angus">Angus</a>!</p>
-        </div>
-        <div class="col-md-6">
-            <img src="assets/images/angus-logo.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 id="title"></h1>
+                <p>Hey there, thanks for checking out <a href="https://github.com/nickjanssen/angus">Angus</a>!</p>
+                <p>You've succesfully managed to run the jQuery example!</p>
+            </div>
+            <div class="col-md-6">
+                <img class="container__logo" src="assets/images/angus-logo.jpg">
+            </div>
         </div>
     </div>
 
