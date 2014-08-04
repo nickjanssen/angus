@@ -98,6 +98,9 @@ Angus has  a `src/` folder which contains all your apps, including the example `
 
 Focus on building your app, let Angus take care of the rest.
 
+### What about version control for my app?
+Using git, you can simply do `git init` inside your app folder (`src/YOURAPP/`) and use git like normal. It really works out of the box!
+
 ## Bower
 
 Bower is used to install and maintain frontend dependencies. Angus doesn't use any `bower.json` files.
