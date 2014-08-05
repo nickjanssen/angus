@@ -32,7 +32,8 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 ## Features
 
 + One Gruntfile for all your apps
-* Framework independent
++ Every app has its own repository
+* Framework agnostic
 * Integrated connect server with pushState support
 * Auto refresh on save
 * Easily define libraries your app is using
@@ -40,6 +41,11 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 * Easily make a production build using `grunt prod` (minified and concatenated)
 * Deploy directly to Amazon S3
 * Serve static resources from a CDN on production
+
+## But wait! I can't have apps...right inside the Angus repository?
+Sure you can! The `src/` folder gets ignored by git, and you can safely have as many repositories as you like in there.
+Once you create a new app, e.g. `/src/my-new-app/` simply run `git init` from that directory!
+No need for complex submodules and all that stuff. This isn't rocket science!
 
 ## Why Grunt? There's Gulp and Brunch out there!
 
