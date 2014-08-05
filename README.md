@@ -1,11 +1,9 @@
 Angus
 =====
 
-Pre-configured framework for fast web-app building.
+Pre-configured scaffolding framework for fast web-app building
 
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
-
-## Why?
 
 Popular build tools such as GruntJS and Yeoman are great, but are a headache when you need to build and maintain several apps.
 Webapps usually have the same requirements in terms of build tooling:
