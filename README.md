@@ -6,7 +6,7 @@ Pre-configured scaffolding framework for fast web-app building
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
 Popular build tools such as GruntJS and Yeoman are great, but are a headache when you need to build and maintain several apps.
-Webapps usually have the same requirements in terms of build tooling:
+Web apps usually have the same requirements in terms of build tooling:
 
 * JSHint the code
 * Clean the `dist/` directory
@@ -25,7 +25,7 @@ Angus solves these problems by turning the build process into something generic 
 
 It also tries to instill the best practices of web app development. It comes with the best configuration and tools for the job. The ultimate goal is to let you build apps without wasting time.
 
-Angus is just a simple scaffolding framework, where you build apps inside of the Angus repository. Every app is a directory inside the `src/` folder. Each app you make with Angus shares the same Gruntfile, but can define all the libraries they need on a per-app level.
+Angus is just a simple scaffolding framework, where you build apps inside of the Angus repository. Every app is a directory inside the `src/` folder **with its own repository**. The `src/` folder gets ignored by the Angus repository. Each app you make with Angus shares the same global Gruntfile, but can define all the libraries they need on a per-app level. 
 
 ## Features
 
