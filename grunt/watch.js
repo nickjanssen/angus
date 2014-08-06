@@ -2,9 +2,6 @@
 
 module.exports = {
     js: {
-        options: {
-            livereload: 35730
-        },
         files: [
             'src/<%= cfg.app %>/**/*',
             '!src/<%= cfg.app %>/config.js',
@@ -14,28 +11,27 @@ module.exports = {
         tasks: ['build_dev']
     },
     html: {
-        options: {
-            livereload: 35730
-        },
         files: [
             'src/<%= cfg.app %>/index.html'
         ],
         tasks: ['build_dev']
     },
-    css: {
-        options: {
-            livereload: 35730
-        },
+    sass: {
         files: [
             'src/<%= cfg.app %>/scss/**/*',
             '!src/<%= cfg.app %>/**/_*'
         ],
         tasks: ['sass:dev']
     },
-    core: {
+    livereload: {
         options: {
             livereload: 35730
         },
+        files: [
+            'dist/dev/**/*'
+        ]
+    },
+    core: {
         files: [
             'src/<%= cfg.app %>/config.js',
             'core/app.config.json',
