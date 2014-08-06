@@ -1,11 +1,11 @@
 Angus
 =====
 
-Pre-configured scaffolding framework for fast web-app building
+One build configuration for all your web apps.
 
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
-Popular build tools such as GruntJS and Yeoman are great, but are a headache when you need to build and maintain several apps.
+Scaffolding tools such as Brunch and Yeoman are great, but are a headache when you need to build and maintain several apps.
 Web apps usually have the same requirements in terms of build tooling:
 
 * JSHint the code
@@ -17,19 +17,17 @@ Web apps usually have the same requirements in terms of build tooling:
 * Run a webserver to test out your app locally
 * Watch for code changes and re-build
 
-A workflow like this is prone to change often, yet it is often very similar across different projects. Having these build steps generated for you can become a maintenance nightmare when you want to change a step. It is also harder to share reusable components across several apps.
+Having these build steps generated for you becomes a maintenance nightmare when you want to change a step.
 
 ## Introducing Angus
 
 Angus solves these problems by turning the build process into something generic and reusable. It allows you to specify libraries on a per-app basis, while still sharing the same build steps.
 
-It also tries to instill the best practices of web app development. It comes with the best configuration and tools for the job. The ultimate goal is to let you build apps without wasting time.
-
-Angus is just a simple scaffolding framework, where you build apps inside of the Angus repository. Every app is a directory inside the `src/` folder **with its own repository**. The `src/` folder gets ignored by the Angus repository. Each app you make with Angus shares the same global Gruntfile, but can define all the libraries they need on a per-app level. 
+Inside Angus, every app is simply a directory inside the `src/` folder **with its own repository**. The `src/` folder gets ignored by the Angus repository. Each app you make with Angus shares the same global Gruntfile, but can define all the libraries they need on a per-app level. 
 
 ## Features
 
-+ One Gruntfile for all your apps
++ One build configuration for all your apps
 + Every app has its own repository
 * Framework agnostic
 * Integrated connect server with pushState support
@@ -44,10 +42,6 @@ Angus is just a simple scaffolding framework, where you build apps inside of the
 Sure you can! The `src/` folder gets ignored by git, and you can safely have as many repositories as you like in there.
 Once you create a new app, e.g. `/src/my-new-app/` simply run `git init` from that directory!
 No need for complex submodules and all that stuff. This isn't rocket science!
-
-## Why Grunt? There's Gulp and Brunch out there!
-
-If you want the very latest, bleeding edge (and usually unstable) technology and you love Chrome Canary, this is probably not for you. Angus is made specifically to help you build and ship stable web apps **today**. Grunt has stood the test of time and has a huge number of plugins available.
 
 # Quick start
 
@@ -77,7 +71,7 @@ http://localhost:9000/
 ```
 
 ### How to use it?
-Internally Angus uses grunt to do all the work. There are two important commands:
+Internally Angus uses GruntJS to do all the work. There are two important commands:
 
 ### `grunt dev [--app=YOURAPP]`
 Builds and serves a configured app for **development**. Files will not be minified nor concatenated.
@@ -86,7 +80,7 @@ Builds and serves a configured app for **development**. Files will not be minifi
 Builds and serves a configured app for **production**. Files will be minified and concatenated.
 
 For both commands, you can find the built files inside the `dist/` folder.
-You can also use the `app` parameter to specify an app to  bebuilt, which is the name of a folder inside `src/`.
+You can also use the `app` parameter to specify an app to be built, which is the name of a folder inside `src/`.
 
 ### `config.json`
 If no `app` parameter is given, a `config.json` file in the root folder of Angus is checked. The file can contain these values:
