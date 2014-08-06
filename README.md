@@ -30,12 +30,13 @@ Inside Angus, every app is simply a directory inside the `src/` folder **with it
 + One build configuration for all your apps
 + Every app has its own repository
 * Framework agnostic
-* Integrated connect server with pushState support
-* Auto refresh on save
 * Easily define libraries your app is using
-* Automatically includes javascript, html templates and scss/css, both app specific and library includes in your `index.html`
+* Integrated connect server with pushState support
+* Auto refresh when files change
+* Soft CSS refresh
+* Automatically includes all javascript, html templates and scss/css in your `index.html`
 * Easily make a production build using `grunt prod` (minified and concatenated)
-* Deploy directly to Amazon S3
+* Deploy directly to Amazon S3 using `grunt deploy_s3`
 * Serve static resources from a CDN on production
 
 ## But wait! I can't have apps...right inside the Angus repository?
