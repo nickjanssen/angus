@@ -145,7 +145,7 @@ Contains a `js`, `tpl` and `scss` array of libraries. These look inside the `bow
 Using `grunt-ng-constant` these variables are automatically included in your AngularJS app as a constant dependency. After building, you will find a `_constants.js` in the root of your app folder which contains these definitions.
 
 #### `gruntTasks` (optional)
-An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them. If you leave these out, Angus will take a default list of tasks from `angus/defaultTasks.js`
+An array of grunt tasks to use, in any order. Angus will have many tasks predefined in the right order, you simply need to add them here to enable them. If you leave these out, Angus will take a default list of tasks from `core/defaultTasks.js`
 
 #### `gruntTasksAdd` (optional)
 In addition to the list of tasks you specified, either by the `gruntTasks` variable above or the default task list provided by Angus, also execute these tasks in addition.

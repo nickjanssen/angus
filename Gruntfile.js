@@ -1,16 +1,19 @@
 'use strict';
 
-var _ = require('underscore');
-var fs = require('fs');
 var walkDir = require('walkdir');
 var path = require('path');
 var buildConfig = require('./nconf.js');
-var sh = require('execSync');
+var appConfig = require('./src/' + buildConfig.get('app') + '/config.js');
+var appTaskFilter = require('./core/appTaskFilter.js');
 
 module.exports = function (grunt) {
 
-    var doChecks = _.some(grunt.cli.tasks, function (task) {
-        return task === 'dev' || task === 'prod';
+    require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('sass-import-compiler');
+
+    // Load core tasks related to Angus itself
+    walkDir.sync('core/tasks/', function (filePath) {
+        require(filePath)(grunt);
     });
 
     // Overwrite build target if present on the command line
@@ -21,85 +24,25 @@ module.exports = function (grunt) {
             buildConfig.get('app').bold + ')').cyan);
     }
 
-    var appConfig = require('./src/' + buildConfig.get('app') + '/config.js');
-
-    if (doChecks) {
-        grunt.log.writeln(('Checking config.js of ' +
-            buildConfig.get('app')).yellow);
-
-        // Do config checks
-        var validate = require('jsonschema').validate;
-        var result = validate(appConfig, require('./app.config.json'));
-
-        result.errors.forEach(function (error) {
-            grunt.fail.fatal(error.stack.replace('instance.', 'src/' +
-                buildConfig.get('app') + '/config.js: '));
-        });
-
-        grunt.log.writeln('Looks good.'.green);
-        grunt.log.writeln('Installing Bower packages...'.yellow);
-
-        var packageCommands = appConfig.packages
-            .map(function (pkg) {
-                return 'bower install ' + pkg;
-            });
-        packageCommands.unshift('rm -rf bower_components');
-
-        result = sh.exec(packageCommands.join(' && '));
-
-        if (result.code !== 0) {
-            grunt.fail.fatal(result.stdout);
-        }
-
-        grunt.log.writeln('Packages installed.'.green);
-        grunt.log.writeln('Checking if any library includes are missing...'.yellow);
-
-        // Check that all libIncludes given for this app exist
-        _.union(appConfig.libIncludes.js,
-            _.pluck(appConfig.libIncludes.tpl, 'libPath'),
-            appConfig.libIncludes.scss).forEach(function (file) {
-            if (!fs.existsSync('bower_components/' + file)) {
-                grunt.fail.fatal('src/' +
-                    buildConfig.get('app') + '/config.js: libIncludes: bower_components/' + file + ' does not exist!');
-            }
-        });
-
-        grunt.log.writeln('All library includes were found.'.green);
-    }
-
-
     var taskConfig = {
         pkg: grunt.file.readJSON('package.json'),
         cfg: buildConfig.get(),
         appcfg: appConfig
     };
 
-    walkDir.sync('./grunt/', function (filePath) {
+    walkDir.sync('grunt/', function (filePath) {
         var name = path.basename(filePath, '.js');
         taskConfig[name] = require(filePath);
     });
 
     grunt.initConfig(taskConfig);
 
-    require('load-grunt-tasks')(grunt);
-    grunt.loadNpmTasks('sass-import-compiler');
-
-    var appTaskFilter = function (entry) {
-        var found = false;
-        var gruntTasks = appConfig.gruntTasks || require('./angus/defaultTasks');
-        if (appConfig.gruntTasksIgnore) {
-            gruntTasks = _.without(gruntTasks, appConfig.gruntTasksIgnore);
-        }
-        if (appConfig.gruntTasksAdd) {
-            gruntTasks = _.union(gruntTasks, appConfig.gruntTasksAdd);
-        }
-        gruntTasks.forEach(function (task) {
-            if (entry.indexOf(task) !== -1) {
-                found = true;
-            }
-        });
-        return found;
-    };
+    grunt.registerTask('check', [
+        'checkConfig',
+        'bowerInstall',
+        'copy:cssAsScssWorkaround',
+        'checkLibIncludes'
+    ]);
 
     grunt.registerTask('build_dev', [
         'jshint',
@@ -131,12 +74,14 @@ module.exports = function (grunt) {
     ].filter(appTaskFilter));
 
     grunt.registerTask('dev', [
+        'check',
         'build_dev',
         'connect:dev',
         'watch'
     ]);
 
     grunt.registerTask('prod', [
+        'check',
         'build_prod',
         'connect:prod',
         'watch'

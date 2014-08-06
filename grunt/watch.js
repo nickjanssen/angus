@@ -7,9 +7,8 @@ module.exports = {
         },
         files: [
             'src/<%= cfg.app %>/**/*',
-            '!dist/**/*',
-            '!grunt/**/*',
-            '!node_modules/**/*',
+            '!src/<%= cfg.app %>/config.js',
+            '!src/<%= cfg.app %>/scss/**/*',
             '!src/<%= cfg.app %>/**/_*'
         ],
         tasks: ['build_dev']
@@ -23,15 +22,6 @@ module.exports = {
         ],
         tasks: ['build_dev']
     },
-    assets: {
-        options: {
-            livereload: 35730
-        },
-        files: [
-            'src/<%= cfg.app %>/assets/**/*'
-        ],
-        tasks: ['build_dev']
-    },
     css: {
         options: {
             livereload: 35730
@@ -42,24 +32,17 @@ module.exports = {
         ],
         tasks: ['sass:dev']
     },
-    lib: {
+    core: {
         options: {
             livereload: 35730
         },
         files: [
-            'bower_components/**/*'
-        ],
-        tasks: ['build_dev']
-    },
-    angus: {
-        options: {
-            livereload: 35730
-        },
-        files: [
-            'app.config.json',
+            'src/<%= cfg.app %>/config.js',
+            'core/app.config.json',
             'Gruntfile.js',
+            'core/**/*',
             'grunt/**/*'
         ],
-        tasks: ['build_dev']
+        tasks: ['check', 'build_dev']
     }
 };

@@ -80,7 +80,7 @@ module.exports = {
         ]
     },
 
-    // In addition to the default task list (angus/defaultTasks.js), also execute these
+    // In addition to the default task list (core/defaultTasks.js), also execute these
     gruntTasksAdd: [
         'html2js',
         'ngconstant',
