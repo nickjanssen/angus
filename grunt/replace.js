@@ -35,7 +35,7 @@ module.exports = {
             variables: {
                 app: '<%= cfg.app %>',
                 minified: '.min',
-                libScripts: libScripts
+                libScripts: ''
             }
         },
         files: [{

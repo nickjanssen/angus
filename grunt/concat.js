@@ -12,12 +12,13 @@ module.exports = {
         separator: ';'
     },
     prod: {
-        src: [
-            './apps/<%= cfg.app %>/**/*.js',
-            '!./apps/<%= cfg.app %>/config.js',
-            './dist/tmp/templates.js',
-            './dist/tmp/templates_lib.js'
-        ].concat(additionalLibs),
-        dest: './dist/prod/assets/js/app/app.min.js'
+        src: additionalLibs.concat([
+            'apps/<%= cfg.app %>/**/*.js',
+            '!apps/<%= cfg.app %>/config.js',
+            '!apps/<%= cfg.app %>/tests/**/*',
+            'dist/tmp/templates.js',
+            'dist/tmp/templates_lib.js'
+        ]),
+        dest: 'dist/prod/assets/js/app/app.min.js'
     }
 };
