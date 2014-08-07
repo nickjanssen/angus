@@ -10,5 +10,5 @@ config.json
 lib/*
 !lib/keep.tmp
 
-src/*
-!src/hello-world/
+apps/*
+!apps/hello-world/

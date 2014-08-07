@@ -4,7 +4,7 @@ var _ = require('underscore');
 
 // Only include templates from libs we are actually using
 var buildConfig = require('../nconf.js');
-var appConfig = require('../src/' + buildConfig.get('app') + '/config.js');
+var appConfig = require('../apps/' + buildConfig.get('app') + '/config.js');
 var libTemplates = appConfig.libIncludes.tpl
 .map(function (lib) {
     return 'bower_components/' + lib.libPath;
@@ -20,7 +20,7 @@ module.exports = {
     options: {
         // custom options, see below
         module: 'templates',
-        base: 'src/<%= cfg.app %>/'
+        base: 'apps/<%= cfg.app %>/'
     },
     libDev: {
         options: {
@@ -34,7 +34,7 @@ module.exports = {
     },
     dev: {
         src: [
-            'src/<%= cfg.app %>/**/*.tpl.html'
+            'apps/<%= cfg.app %>/**/*.tpl.html'
         ],
         dest: 'dist/dev/assets/js/templates/templates.js'
     },
@@ -50,7 +50,7 @@ module.exports = {
     },
     prod: {
         src: [
-            'src/<%= cfg.app %>/**/*.tpl.html'
+            'apps/<%= cfg.app %>/**/*.tpl.html'
         ],
         // We put the templates in a temp directory as we concat it
         // shortly afterwards

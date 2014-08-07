@@ -5,13 +5,13 @@ var _ = require('underscore');
 
 var constants = {};
 
-_.extend(constants, require('../src/' + buildConfig.get('app') + '/config.js').constants);
+_.extend(constants, require('../apps/' + buildConfig.get('app') + '/config.js').constants);
 
 module.exports = {
     ngconstant: {
         options: {
             name: 'constants',
-            dest: 'src/<%= cfg.app %>/_constants.js',
+            dest: 'apps/<%= cfg.app %>/_constants.js',
             constants: constants
         }
     }

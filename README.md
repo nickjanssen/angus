@@ -23,7 +23,7 @@ Having these build steps generated for you becomes a maintenance nightmare when 
 
 Angus solves these problems by turning the build process into something generic and reusable. It allows you to specify libraries on a per-app basis, while still sharing the same build steps.
 
-Inside Angus, every app is simply a directory inside the `src/` folder **with its own repository**. The `src/` folder gets ignored by the Angus repository. Each app you make with Angus shares the same global Gruntfile, but can define all the libraries they need on a per-app level. 
+Inside Angus, every app is simply a directory inside the `apps/` folder **with its own repository**. The `apps/` folder gets ignored by the Angus repository. Each app you make with Angus shares the same global Gruntfile, but can define all the libraries they need on a per-app level.
 
 ## Features
 
@@ -40,8 +40,8 @@ Inside Angus, every app is simply a directory inside the `src/` folder **with it
 * Serve static resources from a CDN on production
 
 ## But wait! I can't have apps...right inside the Angus repository?
-Sure you can! The `src/` folder gets ignored by git, and you can safely have as many repositories as you like in there.
-Once you create a new app, e.g. `/src/my-new-app/` simply run `git init` from that directory!
+Sure you can! The `apps/` folder gets ignored by git, and you can safely have as many repositories as you like in there.
+Once you create a new app, e.g. `/apps/my-new-app/` simply run `git init` from that directory!
 No need for complex submodules and all that stuff. This isn't rocket science!
 
 # Quick start
@@ -81,7 +81,7 @@ Builds and serves a configured app for **development**. Files will not be minifi
 Builds and serves a configured app for **production**. Files will be minified and concatenated.
 
 For both commands, you can find the built files inside the `dist/` folder.
-You can also use the `app` parameter to specify an app to be built, which is the name of a folder inside `src/`.
+You can also use the `app` parameter to specify an app to be built, which is the name of a folder inside `apps/`.
 
 ### `config.json`
 If no `app` parameter is given, a `config.json` file in the root folder of Angus is checked. The file can contain these values:
@@ -93,12 +93,12 @@ If no `app` parameter is given, a `config.json` file in the root folder of Angus
 ```
 
 ### How does it work?
-Angus has  a `src/` folder which contains all your apps, including the example `hello-world`. The `src/` folder is ignored by git, and you can safely have sub-repositories inside. These sub-repositories are actual apps without all the extra files such as `Gruntfile.js`, `.jshintrc`, `package.json` etc, as these are maintained on a higher level.
+Angus has  a `apps/` folder which contains all your apps, including the example `hello-world`. The `apps/` folder is ignored by git, and you can safely have sub-repositories inside. These sub-repositories are actual apps without all the extra files such as `Gruntfile.js`, `.jshintrc`, `package.json` etc, as these are maintained on a higher level.
 
 Focus on building your app, let Angus take care of the rest.
 
 ### What about version control for my app?
-Using git, you can simply do `git init` inside your app folder (`src/YOURAPP/`) and use git like normal. It really works out of the box!
+Using git, you can simply do `git init` inside your app folder (`apps/YOURAPP/`) and use git like normal. It really works out of the box!
 
 ## Bower
 
@@ -111,10 +111,10 @@ Most Bower packages contain different flavors of the actual library. These inclu
 
 ## Apps
 
-Apps are contained within the `src/` folder. Each app has its own folder. They are structured this way:
+Apps are contained within the `apps/` folder. Each app has its own folder. They are structured this way:
 ```
 angus/
-    src/
+    apps/
         hello-world/
             assets/
             scss/

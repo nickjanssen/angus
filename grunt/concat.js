@@ -2,7 +2,7 @@
 
 var buildConfig = require('../nconf.js');
 
-var additionalLibs = require('../src/' + buildConfig.get('app') + '/config.js').libIncludes.js
+var additionalLibs = require('../apps/' + buildConfig.get('app') + '/config.js').libIncludes.js
 .map(function (lib) {
     return 'bower_components/' + lib;
 });
@@ -13,8 +13,8 @@ module.exports = {
     },
     prod: {
         src: [
-            './src/<%= cfg.app %>/**/*.js',
-            '!./src/<%= cfg.app %>/config.js',
+            './apps/<%= cfg.app %>/**/*.js',
+            '!./apps/<%= cfg.app %>/config.js',
             './dist/tmp/templates.js',
             './dist/tmp/templates_lib.js'
         ].concat(additionalLibs),

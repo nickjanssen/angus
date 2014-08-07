@@ -1,7 +1,7 @@
 'use strict';
 
 var buildConfig = require('../nconf.js');
-var appConfig = require('../src/' + buildConfig.get('app') + '/config.js');
+var appConfig = require('../apps/' + buildConfig.get('app') + '/config.js');
 var _ = require('underscore');
 
 module.exports = function (entry) {

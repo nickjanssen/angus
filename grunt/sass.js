@@ -6,7 +6,7 @@ module.exports = {
             style: 'expanded'
         },
         files: {
-            'dist/dev/assets/app.css': 'src/<%= cfg.app %>/scss/app.scss'
+            'dist/dev/assets/app.css': 'apps/<%= cfg.app %>/scss/app.scss'
         }
     },
     prod: {
@@ -14,7 +14,7 @@ module.exports = {
             style: 'compressed'
         },
         files: {
-            'dist/prod/assets/app.css': 'src/<%= cfg.app %>/scss/app.scss'
+            'dist/prod/assets/app.css': 'apps/<%= cfg.app %>/scss/app.scss'
         }
     }
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 var buildConfig = require('../../nconf.js');
-var appConfig = require('../../src/' + buildConfig.get('app') + '/config.js');
+var appConfig = require('../../apps/' + buildConfig.get('app') + '/config.js');
 
 module.exports = function (grunt) {
 
@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         var result = validate(appConfig, require('../app.config.json'));
 
         result.errors.forEach(function (error) {
-            grunt.fail.fatal(error.stack.replace('instance.', 'src/' +
+            grunt.fail.fatal(error.stack.replace('instance.', 'apps/' +
                 buildConfig.get('app') + '/config.js: '));
         });
 

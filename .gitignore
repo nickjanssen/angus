@@ -9,7 +9,7 @@ config.json
 
 bower_components
 
-src/*
-!src/hello-world-angular/
-!src/hello-world-jquery/
+apps/*
+!apps/hello-world-angular/
+!apps/hello-world-jquery/
 

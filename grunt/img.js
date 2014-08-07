@@ -3,7 +3,7 @@
 module.exports = {
     all: {
         src: [
-            'src/<%= cfg.app %>/assets/**/*',
+            'apps/<%= cfg.app %>/assets/**/*',
         ]
     }
 };

@@ -24,7 +24,7 @@ module.exports = {
             {
                 expand: true,
                 // flatten: true,
-                cwd: 'src/<%= cfg.app %>/',
+                cwd: 'apps/<%= cfg.app %>/',
                 src: [
                     '*.html',
                 ],
@@ -33,7 +33,7 @@ module.exports = {
             {
                 expand: true,
                 // flatten: true,
-                cwd: 'src/<%= cfg.app %>/',
+                cwd: 'apps/<%= cfg.app %>/',
                 src: [
                     '**/*.js',
                     '!**/config.js',
@@ -44,12 +44,12 @@ module.exports = {
                 expand: true,
                 // flatten: true,
                 cwd: 'bower_components/',
-                src: require('../src/' + buildConfig.get('app') + '/config.js').libIncludes.js,
+                src: require('../apps/' + buildConfig.get('app') + '/config.js').libIncludes.js,
                 dest: './dist/dev/assets/js/lib/'
             },
             {
                 expand: true,
-                cwd: 'src/<%= cfg.app %>/assets/',
+                cwd: 'apps/<%= cfg.app %>/assets/',
                 src: [
                     '**/*',
                 ],
@@ -63,13 +63,13 @@ module.exports = {
                 expand: true,
                 flatten: true,
                 src: [
-                    'src/<%= cfg.app %>/*.html'
+                    'apps/<%= cfg.app %>/*.html'
                 ],
                 dest: './dist/prod/'
             },
             {
                 expand: true,
-                cwd: 'src/<%= cfg.app %>/assets/',
+                cwd: 'apps/<%= cfg.app %>/assets/',
                 src: [
                     '**/*',
                     '!**/config.js',

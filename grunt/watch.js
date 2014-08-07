@@ -3,23 +3,23 @@
 module.exports = {
     js: {
         files: [
-            'src/<%= cfg.app %>/**/*',
-            '!src/<%= cfg.app %>/config.js',
-            '!src/<%= cfg.app %>/scss/**/*',
-            '!src/<%= cfg.app %>/**/_*'
+            'apps/<%= cfg.app %>/**/*',
+            '!apps/<%= cfg.app %>/config.js',
+            '!apps/<%= cfg.app %>/scss/**/*',
+            '!apps/<%= cfg.app %>/**/_*'
         ],
         tasks: ['build_dev']
     },
     html: {
         files: [
-            'src/<%= cfg.app %>/index.html'
+            'apps/<%= cfg.app %>/index.html'
         ],
         tasks: ['build_dev']
     },
     sass: {
         files: [
-            'src/<%= cfg.app %>/scss/**/*',
-            '!src/<%= cfg.app %>/**/_*'
+            'apps/<%= cfg.app %>/scss/**/*',
+            '!apps/<%= cfg.app %>/**/_*'
         ],
         tasks: ['sass:dev']
     },
@@ -33,7 +33,7 @@ module.exports = {
     },
     core: {
         files: [
-            'src/<%= cfg.app %>/config.js',
+            'apps/<%= cfg.app %>/config.js',
             'core/app.config.json',
             'Gruntfile.js',
             'core/**/*',

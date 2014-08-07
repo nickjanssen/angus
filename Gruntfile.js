@@ -3,7 +3,7 @@
 var walkDir = require('walkdir');
 var path = require('path');
 var buildConfig = require('./nconf.js');
-var appConfig = require('./src/' + buildConfig.get('app') + '/config.js');
+var appConfig = require('./apps/' + buildConfig.get('app') + '/config.js');
 var appTaskFilter = require('./core/appTaskFilter.js');
 
 module.exports = function (grunt) {

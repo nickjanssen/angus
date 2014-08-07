@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var fs = require('fs');
 var buildConfig = require('../../nconf.js');
-var appConfig = require('../../src/' + buildConfig.get('app') + '/config.js');
+var appConfig = require('../../apps/' + buildConfig.get('app') + '/config.js');
 
 module.exports = function (grunt) {
 
@@ -16,7 +16,7 @@ module.exports = function (grunt) {
             _.pluck(appConfig.libIncludes.tpl, 'libPath'),
             appConfig.libIncludes.scss).forEach(function (file) {
             if (!fs.existsSync('bower_components/' + file)) {
-                grunt.fail.fatal('src/' +
+                grunt.fail.fatal('apps/' +
                     buildConfig.get('app') + '/config.js: libIncludes: bower_components/' + file + ' does not exist!');
             }
         });
