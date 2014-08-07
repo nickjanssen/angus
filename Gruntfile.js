@@ -47,6 +47,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build_dev', [
         'jshint',
+        'karma',
         'ngconstant',
         'clean:dev',
         'copy:dev',
@@ -60,6 +61,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build_prod', [
         'jshint',
+        'karma',
         'ngconstant',
         'clean:prod',
         'copy:prod',

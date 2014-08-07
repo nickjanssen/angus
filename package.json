@@ -58,6 +58,11 @@
     "grunt-s3": "^0.2.0-alpha.3",
     "grunt-img": "^0.1.8",
     "execSync": "^1.0.1-pre",
-    "colors": "^0.6.2"
+    "colors": "^0.6.2",
+    "karma": "^0.12.21",
+    "grunt-karma": "^0.8.3",
+    "karma-jasmine": "^0.1.5",
+    "phantomjs": "^1.9.7-15",
+    "karma-phantomjs-launcher": "^0.1.4"
   }
 }

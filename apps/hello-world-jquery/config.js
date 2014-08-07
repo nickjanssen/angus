@@ -74,6 +74,11 @@ module.exports = {
         ]
     },
 
+    // In addition to the default task list (core/defaultTasks.js), also execute these
+    gruntTasksAdd: [
+        'karma'
+    ],
+
     // ngconstant will parse this object and allow you to access them in your app
     constants: {}
 };

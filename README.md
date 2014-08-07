@@ -27,13 +27,14 @@ Inside Angus, every app is simply a directory inside the `apps/` folder **with i
 
 ## Features
 
-+ One build configuration for all your apps
-+ Every app has its own repository
+* One build configuration for all your apps
+* Every app has its own repository
 * Framework agnostic
 * Easily define libraries your app is using
 * Integrated connect server with pushState support
 * Auto refresh when files change
 * Soft CSS refresh
+* Unit tests on every save using Karma (enable the `karma` task)
 * Automatically includes all javascript, html templates and scss/css in your `index.html`
 * Easily make a production build using `grunt prod` (minified and concatenated)
 * Deploy directly to Amazon S3 using `grunt deploy_s3`

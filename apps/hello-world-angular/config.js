@@ -85,6 +85,7 @@ module.exports = {
         'html2js',
         'ngconstant',
         'ngmin',
+        'karma'
     ],
 
     // ngconstant will parse this object and allow you to access them in your app
