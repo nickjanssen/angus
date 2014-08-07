@@ -61,6 +61,7 @@ module.exports = {
                 cwd: 'apps/<%= cfg.app %>/',
                 src: [
                     '**/*.js',
+                    '!tests/**/*',
                     '!**/config.js',
                 ],
                 dest: './dist/dev/assets/js/app/'
