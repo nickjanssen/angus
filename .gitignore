@@ -6,6 +6,8 @@ node_modules
 dist
 config.json
 *.sublime*
+.editorconfig
+.jshintrc
 
 bower_components
 

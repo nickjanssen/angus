@@ -40,6 +40,7 @@ module.exports = function (grunt) {
     grunt.registerTask('check', [
         'checkConfig',
         'bowerInstall',
+        'copy:lintSettings',
         'copy:cssAsScssWorkaround',
         'checkLibIncludes'
     ]);
