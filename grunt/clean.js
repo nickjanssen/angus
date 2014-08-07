@@ -3,12 +3,14 @@
 module.exports = {
     dev: {
         src: [
-            './dist/dev/'
+            './dist/dev/',
+            './dist/tmp/'
         ]
     },
     prod: {
         src: [
-            './dist/prod/'
+            './dist/prod/',
+            './dist/tmp/'
         ]
     }
 };
