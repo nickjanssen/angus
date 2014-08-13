@@ -135,7 +135,7 @@ Your app's JavaScript starting point. If you're using AngularJS, this is where y
 This file is the heart of your app and defines Javascript and CSS/SCSS dependencies. It is a `.js` and not a `.json` file on purpose, to allow you to add comments and optionally more complex logic.
 
 It contains a few variables:
-#### `libIncludes`
+#### `packages`
 A list of bower dependencies this app will use. Each package will be installed using the command 'bower install <package>'
 Remember that you can also use git repo's, local folders, URL's and specify version and/or tags.
 Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info.
