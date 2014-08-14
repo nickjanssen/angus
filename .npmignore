@@ -3,12 +3,4 @@ manifest.mf
 build.xml
 .sass-cache
 node_modules
-dist
-config.json
 *.sublime*
-
-lib/*
-!lib/keep.tmp
-
-apps/*
-!apps/hello-world/
