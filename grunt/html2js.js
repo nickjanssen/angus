@@ -2,58 +2,59 @@
 
 var _ = require('underscore');
 
-// Only include templates from libs we are actually using
-var buildConfig = require('../nconf.js');
-var appConfig = require('../apps/' + buildConfig.get('app') + '/config.js');
-var libTemplates = appConfig.libIncludes.tpl
-.map(function (lib) {
-    return 'bower_components/' + lib.libPath;
-});
+module.exports = function (angus) {
 
-var libRename = function (moduleName) {
-    return _.find(appConfig.libIncludes.tpl, function (template) {
-        return template.libPath === moduleName;
-    }).readAs;
-};
+    // Only include templates from libs we are actually using
+    var libTemplates = angus.appConfig.libIncludes.tpl
+        .map(function (lib) {
+            return angus.path + '/bower_components/' + lib.libPath;
+        });
 
-module.exports = {
-    options: {
-        // custom options, see below
-        module: 'templates',
-        base: 'apps/<%= cfg.app %>/'
-    },
-    libDev: {
+    var libRename = function (moduleName) {
+        return _.find(angus.appConfig.libIncludes.tpl, function (template) {
+            return template.libPath === moduleName;
+        }).readAs;
+    };
+
+    return {
         options: {
             // custom options, see below
-            module: 'templates_lib',
-            rename: libRename,
-            base: 'bower_components/'
+            module: 'templates',
+            base: angus.appPath + '/src'
         },
-        src: libTemplates,
-        dest: 'dist/dev/assets/js/templates/templates_lib.js'
-    },
-    dev: {
-        src: [
-            'apps/<%= cfg.app %>/**/*.tpl.html'
-        ],
-        dest: 'dist/dev/assets/js/templates/templates.js'
-    },
-    libProd: {
-        options: {
-            // custom options, see below
-            module: 'templates_lib',
-            rename: libRename,
-            base: 'bower_components/'
+        libDev: {
+            options: {
+                // custom options, see below
+                module: 'templates_lib',
+                rename: libRename,
+                base: angus.appPath + '/bower_components/'
+            },
+            src: libTemplates,
+            dest: angus.appPath + '/dist/dev/assets/js/templates/templates_lib.js'
         },
-        src: libTemplates,
-        dest: 'dist/tmp/templates_lib.js'
-    },
-    prod: {
-        src: [
-            'apps/<%= cfg.app %>/**/*.tpl.html'
-        ],
-        // We put the templates in a temp directory as we concat it
-        // shortly afterwards
-        dest: 'dist/tmp/templates.js'
-    }
+        dev: {
+            src: [
+                angus.appPath + '/src/**/*.tpl.html'
+            ],
+            dest: angus.appPath + '/dist/dev/assets/js/templates/templates.js'
+        },
+        libProd: {
+            options: {
+                // custom options, see below
+                module: 'templates_lib',
+                rename: libRename,
+                base: angus.appPath + '/bower_components/'
+            },
+            src: libTemplates,
+            dest: angus.appPath + '/dist/tmp/templates_lib.js'
+        },
+        prod: {
+            src: [
+                angus.appPath + '/src/**/*.tpl.html'
+            ],
+            // We put the templates in a temp directory as we concat it
+            // shortly afterwards
+            dest: angus.appPath + '/dist/tmp/templates.js'
+        }
+    };
 };

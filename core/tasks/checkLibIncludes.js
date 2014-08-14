@@ -2,22 +2,19 @@
 
 var _ = require('underscore');
 var fs = require('fs');
-var buildConfig = require('../../nconf.js');
-var appConfig = require('../../apps/' + buildConfig.get('app') + '/config.js');
 
-module.exports = function (grunt) {
+module.exports = function (grunt, angus) {
 
     grunt.task.registerTask('checkLibIncludes', '', function () {
 
         grunt.log.writeln('Checking if any library includes are missing...'.yellow);
 
         // Check that all libIncludes given for this app exist
-        _.union(appConfig.libIncludes.js,
-            _.pluck(appConfig.libIncludes.tpl, 'libPath'),
-            appConfig.libIncludes.scss).forEach(function (file) {
-            if (!fs.existsSync('bower_components/' + file)) {
-                grunt.fail.fatal('apps/' +
-                    buildConfig.get('app') + '/config.js: libIncludes: bower_components/' + file + ' does not exist!');
+        _.union(angus.appConfig.libIncludes.js,
+            _.pluck(angus.appConfig.libIncludes.tpl, 'libPath'),
+            angus.appConfig.libIncludes.scss).forEach(function (file) {
+            if (!fs.existsSync(angus.appPath + '/bower_components/' + file)) {
+                grunt.fail.fatal('angus.config.js [libIncludes] bower_components/' + file + ' does not exist!');
             }
         });
 

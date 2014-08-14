@@ -1,44 +1,44 @@
 'use strict';
 
-module.exports = {
-    js: {
-        files: [
-            'apps/<%= cfg.app %>/**/*',
-            '!apps/<%= cfg.app %>/config.js',
-            '!apps/<%= cfg.app %>/scss/**/*',
-            '!apps/<%= cfg.app %>/**/_*'
-        ],
-        tasks: ['build_dev']
-    },
-    html: {
-        files: [
-            'apps/<%= cfg.app %>/index.html'
-        ],
-        tasks: ['build_dev']
-    },
-    sass: {
-        files: [
-            'apps/<%= cfg.app %>/scss/**/*',
-            '!apps/<%= cfg.app %>/**/_*'
-        ],
-        tasks: ['sass:dev']
-    },
-    livereload: {
-        options: {
-            livereload: 35730
+module.exports = function (angus) {
+    return {
+        js: {
+            files: [
+                angus.appPath + '/src/**/*',
+
+                // Don't watch the scss, as we will watch the compiled CSS for a soft refresh
+                '!' + angus.appPath + '/src/scss/**/*',
+
+                '!' + angus.appPath + '/**/_*'
+            ],
+            tasks: ['build_dev']
         },
-        files: [
-            'dist/dev/**/*'
-        ]
-    },
-    core: {
-        files: [
-            'apps/<%= cfg.app %>/config.js',
-            'core/app.config.json',
-            'Gruntfile.js',
-            'core/**/*',
-            'grunt/**/*'
-        ],
-        tasks: ['check', 'build_dev']
-    }
+        html: {
+            files: [
+                angus.appPath + '/src/index.html'
+            ],
+            tasks: ['build_dev']
+        },
+        sass: {
+            files: [
+                angus.appPath + '/src/scss/**/*',
+                '!' + angus.appPath + '/**/_*'
+            ],
+            tasks: ['sass:dev']
+        },
+        livereload: {
+            options: {
+                livereload: 35730
+            },
+            files: [
+                angus.appPath + '/dist/dev/**/*'
+            ]
+        },
+        core: {
+            files: [
+                angus.appPath + '/angus.config.js'
+            ],
+            tasks: ['check', 'build_dev']
+        }
+    };
 };

@@ -1,107 +1,72 @@
 'use strict';
 
-var buildConfig = require('../nconf.js');
 
-module.exports = {
 
-    // By default, your apps will use .jshintrc and .editorconfig files
-    // that come from the core/ folder. You can use your own rule files
-    // by including them inside your app folder.
-    lintSettings: {
-        files: [
-            {
-                expand: true,
-                cwd: 'core/',
-                src: [
-                    '.jshintrc',
-                    '.editorconfig',
-                ],
-                dest: './'
-            },
-            {
-                expand: true,
-                cwd: 'apps/<%= cfg.app %>/',
-                src: [
-                    '.jshintrc',
-                    '.editorconfig',
-                ],
-                dest: './'
-            }
-        ]
-    },
+module.exports = function (angus) {
+    return {
 
-    // Workaround to include CSS files using sass @import rules
-    // This task copies all CSS files and renames them to SCSS
-    cssAsScssWorkaround: {
-        files: [
-            {
+        // Workaround to include CSS files using sass @import rules
+        // This task copies all CSS files and renames them to SCSS
+        // See https://github.com/sass/sass/issues/556
+        cssAsScssWorkaround: {
+            files: [{
                 expand: true,
-                cwd: 'bower_components',
+                cwd: angus.appPath + '/bower_components',
                 src: ['**/*.css', '!**/*.min.css'],
-                dest: 'bower_components',
+                dest: angus.appPath + '/bower_components',
                 filter: 'isFile',
                 ext: '.scss'
-            }
-        ]
-    },
-    dev: {
-        files: [
-            {
+            }]
+        },
+
+        dev: {
+            files: [{
                 expand: true,
                 // flatten: true,
-                cwd: 'apps/<%= cfg.app %>/',
+                cwd: angus.appPath + '/src',
                 src: [
                     '*.html',
                 ],
-                dest: './dist/dev/'
-            },
-            {
+                dest: angus.appPath + '/dist/dev/'
+            }, {
                 expand: true,
                 // flatten: true,
-                cwd: 'apps/<%= cfg.app %>/',
+                cwd: angus.appPath + '/src',
                 src: [
-                    '**/*.js',
-                    '!tests/**/*',
-                    '!**/config.js',
+                    '**/*.js'
                 ],
-                dest: './dist/dev/assets/js/app/'
-            },
-            {
+                dest: angus.appPath + '/dist/dev/assets/js/app/'
+            }, {
                 expand: true,
                 // flatten: true,
-                cwd: 'bower_components/',
-                src: require('../apps/' + buildConfig.get('app') + '/config.js').libIncludes.js,
-                dest: './dist/dev/assets/js/lib/'
-            },
-            {
+                cwd: angus.appPath + '/bower_components/',
+                src: angus.appConfig.libIncludes.js,
+                dest: angus.appPath + '/dist/dev/assets/js/lib/'
+            }, {
                 expand: true,
-                cwd: 'apps/<%= cfg.app %>/assets/',
+                cwd: angus.appPath + '/src/assets/',
                 src: [
                     '**/*',
                 ],
-                dest: './dist/dev/assets/'
-            }
-        ]
-    },
-    prod: {
-        files: [
-            {
+                dest: angus.appPath + '/dist/dev/assets/'
+            }]
+        },
+        prod: {
+            files: [{
                 expand: true,
                 flatten: true,
                 src: [
-                    'apps/<%= cfg.app %>/*.html'
+                    angus.appPath + '/src/*.html'
                 ],
-                dest: './dist/prod/'
-            },
-            {
+                dest: angus.appPath + '/dist/prod/'
+            }, {
                 expand: true,
-                cwd: 'apps/<%= cfg.app %>/assets/',
+                cwd: angus.appPath + '/src/assets/',
                 src: [
-                    '**/*',
-                    '!**/config.js',
+                    '**/*'
                 ],
-                dest: './dist/prod/assets/'
-            }
-        ]
-    }
+                dest: angus.appPath + '/dist/prod/assets/'
+            }]
+        }
+    };
 };

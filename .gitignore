@@ -10,8 +10,3 @@ config.json
 .jshintrc
 
 bower_components
-
-apps/*
-!apps/hello-world-angular/
-!apps/hello-world-jquery/
-

@@ -1,20 +1,25 @@
 'use strict';
 
-module.exports = {
-    dev: {
-        options: {
-            style: 'expanded'
+module.exports = function (angus) {
+
+    var filesDev = {};
+    filesDev[angus.appPath + '/dist/dev/assets/app.css'] = angus.appPath + '/src/scss/app.scss';
+
+    var filesProd = {};
+    filesProd[angus.appPath + '/dist/prod/assets/app.css'] = angus.appPath + '/src/scss/app.scss';
+
+    return {
+        dev: {
+            options: {
+                style: 'expanded'
+            },
+            files: filesDev
         },
-        files: {
-            'dist/dev/assets/app.css': 'apps/<%= cfg.app %>/scss/app.scss'
+        prod: {
+            options: {
+                style: 'compressed'
+            },
+            files: filesProd
         }
-    },
-    prod: {
-        options: {
-            style: 'compressed'
-        },
-        files: {
-            'dist/prod/assets/app.css': 'apps/<%= cfg.app %>/scss/app.scss'
-        }
-    }
+    };
 };

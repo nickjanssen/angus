@@ -7,19 +7,20 @@ module.exports = {
     // Remember that you can also use git repo's, local folders, URL's and specify version and/or tags
     // Please see http://bower.io/docs/api/#install for more info
     packages: [
-        'http://code.jquery.com/jquery-2.1.0.min.js',
+        'angular',
         'bootstrap-sass-official'
     ],
+
+    // The port this app will be accessible on
+    port: 9000,
 
     // A list of files which this app will actually use from the bower packages above.
     // Angus will look inside bower_components/ for these files.
     libIncludes: {
 
         js: [
-            'jquery-2.1.0.min/index.js'
+            'angular/angular.js'
         ],
-
-        tpl: [],
 
         scss: [
             // Core variables and mixins
@@ -36,14 +37,14 @@ module.exports = {
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss',
             'bootstrap-sass-official/assets/stylesheets/bootstrap/_grid.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_tables.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss',
 
             // Components
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_component-animations.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_glyphicons.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_dropdowns.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss',
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss',
@@ -63,7 +64,7 @@ module.exports = {
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_close.scss',
 
             // Components w/ JavaScript
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_modals.scss'
+            'bootstrap-sass-official/assets/stylesheets/bootstrap/_modals.scss'
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_carousel.scss',
@@ -71,11 +72,23 @@ module.exports = {
             // Utility classes
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_utilities.scss',
             // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_responsive-utilities.scss',
-        ]
+        ],
+
+        // Used with AngularJS apps. Be sure to enable the html2js task.
+        // Templates are an array of objects, to deal with html2js caching
+        // e.g.
+        // {
+        //     libPath: 'angular-ui/template/modal/backdrop.html',
+        //     readAs: 'template/modal/backdrop.html'
+        // }
+        tpl: []
     },
 
     // In addition to the default task list (core/defaultTasks.js), also execute these
     gruntTasksAdd: [
+        'html2js',
+        'ngconstant',
+        'ngmin',
         'karma'
     ],
 

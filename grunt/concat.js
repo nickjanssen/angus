@@ -1,24 +1,23 @@
 'use strict';
 
-var buildConfig = require('../nconf.js');
+module.exports = function (angus) {
 
-var additionalLibs = require('../apps/' + buildConfig.get('app') + '/config.js').libIncludes.js
-.map(function (lib) {
-    return 'bower_components/' + lib;
-});
+    var additionalLibs = angus.appConfig.libIncludes.js
+    .map(function (lib) {
+        return angus.appPath + '/bower_components/' + lib;
+    });
 
-module.exports = {
-    options: {
-        separator: ';'
-    },
-    prod: {
-        src: additionalLibs.concat([
-            'apps/<%= cfg.app %>/**/*.js',
-            '!apps/<%= cfg.app %>/config.js',
-            '!apps/<%= cfg.app %>/tests/**/*',
-            'dist/tmp/templates.js',
-            'dist/tmp/templates_lib.js'
-        ]),
-        dest: 'dist/prod/assets/js/app/app.min.js'
-    }
+    return {
+        options: {
+            separator: ';'
+        },
+        prod: {
+            src: additionalLibs.concat([
+                angus.appPath + '/src/**/*.js',
+                angus.appPath + '/dist/tmp/templates.js',
+                angus.appPath + '/dist/tmp/templates_lib.js'
+            ]),
+            dest: angus.appPath + '/dist/prod/assets/js/app/app.min.js'
+        }
+    };
 };

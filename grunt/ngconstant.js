@@ -1,18 +1,20 @@
 'use strict';
 
-var buildConfig = require('../nconf.js');
 var _ = require('underscore');
 
-var constants = {};
+module.exports = function (angus) {
 
-_.extend(constants, require('../apps/' + buildConfig.get('app') + '/config.js').constants);
+    var constants = {};
 
-module.exports = {
-    ngconstant: {
-        options: {
-            name: 'constants',
-            dest: 'apps/<%= cfg.app %>/_constants.js',
-            constants: constants
+    _.extend(constants, angus.appConfig.constants);
+
+    return {
+        ngconstant: {
+            options: {
+                name: 'constants',
+                dest: angus.appPath + '/src/_constants.js',
+                constants: constants
+            }
         }
-    }
+    };
 };

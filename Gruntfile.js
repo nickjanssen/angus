@@ -1,49 +1,55 @@
 'use strict';
 
-var walkDir = require('walkdir');
-var path = require('path');
-var buildConfig = require('./nconf.js');
-var appConfig = require('./apps/' + buildConfig.get('app') + '/config.js');
-var appTaskFilter = require('./core/appTaskFilter.js');
-
 module.exports = function (grunt) {
+
+
+    var walkDir = require('walkdir');
+    var path = require('path');
+    var _ = require('underscore');
+
 
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('sass-import-compiler');
 
-    // Load core tasks related to Angus itself
-    walkDir.sync('core/tasks/', function (filePath) {
-        require(filePath)(grunt);
-    });
-
-    // Overwrite build target if present on the command line
-    if (grunt.option('app')) {
-        buildConfig.set('app', grunt.option('app'));
-    } else {
-        grunt.log.writeln(('No --app parameter given, using config.json (' +
-            buildConfig.get('app').bold + ')').cyan);
+    if (!grunt.option('path')) {
+        grunt.fail.fatal('No app path given!');
     }
 
-    var taskConfig = {
-        pkg: grunt.file.readJSON('package.json'),
-        cfg: buildConfig.get(),
-        appcfg: appConfig
+    var appConfig = require(grunt.option('path') + '/angus.config.js');
+
+    var angus = {
+        'package': grunt.file.readJSON('package.json'),
+        'appPath': grunt.option('path'),
+        'appName': path.basename(grunt.option('path')),
+        'appConfig': appConfig
     };
+
+    // Load core tasks related to Angus itself
+    walkDir.sync('core/tasks/', function (filePath) {
+        require(filePath)(grunt, angus);
+    });
+
+    // Load app-specific build tasks
+    var tasks = {};
 
     walkDir.sync('grunt/', function (filePath) {
         var name = path.basename(filePath, '.js');
-        taskConfig[name] = require(filePath);
+        tasks[name] = require(filePath)(angus);
     });
 
-    grunt.initConfig(taskConfig);
+    angus = _.extend(angus, tasks);
+
+    grunt.initConfig(angus);
 
     grunt.registerTask('check', [
         'checkConfig',
         'bowerInstall',
-        'copy:lintSettings',
         'copy:cssAsScssWorkaround',
         'checkLibIncludes'
     ]);
+
+    // This function removes or adds build tasks depending on the app config
+    var appTaskFilter = require('./core/appTaskFilter.js')(angus);
 
     grunt.registerTask('build_dev', [
         'jshint',

@@ -1,15 +1,18 @@
 'use strict';
 
-var buildConfig = require('../nconf.js');
-var libScss = require('../apps/' + buildConfig.get('app') + '/config.js').libIncludes.scss
-.map(function (lib) {
-    return 'bower_components/' + lib;
-});
+module.exports = function (angus) {
 
-module.exports = {
-    all: {
-        files: {
-            'apps/<%= cfg.app %>/scss/_includes.scss': libScss,
+    var libScss = angus.appConfig.libIncludes.scss
+        .map(function (lib) {
+            return angus.appPath + '/bower_components/' + lib;
+        });
+
+    var files = {};
+    files[angus.appPath + '/src/scss/_includes.scss'] = libScss;
+
+    return {
+        all: {
+            files: files
         }
-    }
+    };
 };

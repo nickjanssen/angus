@@ -1,20 +1,19 @@
 'use strict';
 
-var buildConfig = require('../../nconf.js');
-var appConfig = require('../../apps/' + buildConfig.get('app') + '/config.js');
 var sh = require('execSync');
 
-module.exports = function (grunt) {
+module.exports = function (grunt, angus) {
 
     grunt.task.registerTask('bowerInstall', '', function () {
 
         grunt.log.writeln('Installing Bower packages...'.yellow);
 
-        var packageCommands = appConfig.packages
+        var packageCommands = angus.appConfig.packages
             .map(function (pkg) {
                 return 'bower install ' + pkg;
             });
         packageCommands.unshift('rm -rf bower_components');
+        packageCommands.unshift('cd ' + angus.appPath);
 
         var result = sh.exec(packageCommands.join(' && '));
 

@@ -1,9 +1,11 @@
 'use strict';
 
-module.exports = {
-    all: {
-        src: [
-            'apps/<%= cfg.app %>/assets/**/*',
-        ]
-    }
+module.exports = function (angus) {
+    return {
+        all: {
+            src: [
+                angus.appPath + '/src/assets/**/*',
+            ]
+        }
+    };
 };

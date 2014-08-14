@@ -3,8 +3,6 @@
 var LIVERELOAD_PORT = 35730;
 var liveReload = require('connect-livereload')({port: LIVERELOAD_PORT});
 
-var buildConfig = require('../nconf.js');
-
 //MODIFIED: add require for connect-modewrite
 var modRewrite = require('connect-modrewrite');
 
@@ -16,21 +14,23 @@ var middleware = function (connect, options) {
     ];
 };
 
-module.exports = {
-    dev: {
-        options: {
-            port: buildConfig.get('port'),
-            base: 'dist/dev/',
-            hostname: '*',
-            middleware: middleware
+module.exports = function (angus) {
+    return {
+        dev: {
+            options: {
+                port: angus.appConfig.port,
+                base: angus.appPath + '/dist/dev/',
+                hostname: '*',
+                middleware: middleware
+            }
+        },
+        prod: {
+            options: {
+                port: angus.appConfig.port,
+                base: angus.appPath + '/dist/prod/',
+                hostname: '*',
+                middleware: middleware
+            }
         }
-    },
-    prod: {
-        options: {
-            port: buildConfig.get('port'),
-            base: 'dist/prod/',
-            hostname: '*',
-            middleware: middleware
-        }
-    }
+    };
 };

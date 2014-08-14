@@ -1,16 +1,15 @@
 'use strict';
 
-module.exports = {
-    files: [
-        '*.js',
-        'apps/<%= cfg.app %>/**/*.js',
-        '!dist/**/*.js',
-        '!node_modules/**/*.js',
-        '!bower_components/**/*.js',
-        '!apps/<%= cfg.app %>/**/_*.js'
-    ],
-    options: {
-        jshintrc: '.jshintrc',
-        ignores: []
-    }
+module.exports = function (angus) {
+    return {
+        files: [
+            angus.appPath + '/src/**/*.js',
+            angus.appPath + '/tests/**/*.js',
+            '!' + angus.appPath + '/**/_*.js'
+        ],
+        options: {
+            jshintrc: '.jshintrc',
+            ignores: []
+        }
+    };
 };

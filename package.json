@@ -1,15 +1,16 @@
 {
   "name": "angus",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "http://nickjanssen.github.io/angus",
   "author": "Nick Janssen <info@nickjanssen.com> (http://nickjanssen.com/)",
   "license": "MIT",
-  "description": "Scaffolding tool for building AngularJS apps.",
+  "description": "One build configuration for all your web apps.",
   "bugs": "https://github.com/nickjanssen/angus/issues",
   "repository": {
     "type": "git",
     "url": "git@github.com:nickjanssen/angus.git"
   },
+  "bin": "angus.js",
   "engines": {
     "node": ">=0.10.0",
     "npm": ">=1.2.10"
@@ -63,6 +64,10 @@
     "grunt-karma": "^0.8.3",
     "karma-jasmine": "^0.1.5",
     "phantomjs": "^1.9.7-15",
-    "karma-phantomjs-launcher": "^0.1.4"
-  }
+    "karma-phantomjs-launcher": "^0.1.4",
+    "minimist": "^1.1.0",
+    "shelljs": "^0.3.0",
+    "update-notifier": "^0.2.0"
+  },
+  "preferGlobal": true
 }
