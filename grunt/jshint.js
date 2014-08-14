@@ -8,7 +8,7 @@ module.exports = function (angus) {
             '!' + angus.appPath + '/**/_*.js'
         ],
         options: {
-            jshintrc: '.jshintrc',
+            jshintrc: angus.appPath + '/.jshintrc',
             ignores: []
         }
     };
