@@ -1,6 +1,6 @@
 'use strict';
 
-var sh = require('execSync');
+var shell = require('shelljs');
 
 module.exports = function (grunt, angus) {
 
@@ -15,10 +15,11 @@ module.exports = function (grunt, angus) {
         packageCommands.unshift('rm -rf bower_components');
         packageCommands.unshift('cd ' + angus.appPath);
 
-        var result = sh.exec(packageCommands.join(' && '));
+        var cmds = packageCommands.join(' && ');
+        var result = shell.exec(cmds);
 
         if (result.code !== 0) {
-            grunt.fail.fatal(result.stdout);
+            grunt.fail.fatal(result.output);
         }
 
         grunt.log.writeln('Packages installed.'.green);
