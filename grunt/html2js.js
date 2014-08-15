@@ -7,7 +7,7 @@ module.exports = function (angus) {
     // Only include templates from libs we are actually using
     var libTemplates = angus.appConfig.libIncludes.tpl
         .map(function (lib) {
-            return angus.path + '/bower_components/' + lib.libPath;
+            return angus.appPath + '/bower_components/' + lib.libPath;
         });
 
     var libRename = function (moduleName) {
