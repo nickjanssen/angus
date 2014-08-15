@@ -11,16 +11,23 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('sass-import-compiler');
 
-    if (!grunt.option('path')) {
+    var appPath = grunt.option('path');
+
+    if (!appPath) {
         grunt.fail.fatal('No app path given!');
     }
 
-    var appConfig = require(grunt.option('path') + '/angus.config.js');
+    var isWin = /^win/.test(process.platform);
+    if (isWin) {
+        appPath = appPath.replace(/\\/g, "\\\\");
+    }
+
+    var appConfig = require(appPath + '/angus.config.js');
 
     var angus = {
         'package': grunt.file.readJSON('package.json'),
-        'appPath': grunt.option('path'),
-        'appName': path.basename(grunt.option('path')),
+        'appPath': appPath,
+        'appName': path.basename(appPath),
         'appConfig': appConfig
     };
 
