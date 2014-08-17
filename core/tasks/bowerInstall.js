@@ -8,7 +8,7 @@ module.exports = function (grunt, angus) {
 
         grunt.log.writeln('Installing Bower packages...'.yellow);
 
-        var packageCommands = angus.appConfig.packages
+        var packageCommands = angus.appConfig.bower.packages
             .map(function (pkg) {
                 return 'bower install ' + pkg;
             });

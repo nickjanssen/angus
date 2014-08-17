@@ -5,13 +5,13 @@ var _ = require('underscore');
 module.exports = function (angus) {
 
     // Only include templates from libs we are actually using
-    var libTemplates = angus.appConfig.libIncludes.tpl
+    var libTemplates = angus.appConfig.bower.filesNeeded.html
         .map(function (lib) {
             return angus.appPath + '/bower_components/' + lib.libPath;
         });
 
     var libRename = function (moduleName) {
-        return _.find(angus.appConfig.libIncludes.tpl, function (template) {
+        return _.find(angus.appConfig.bower.filesNeeded.html, function (template) {
             return template.libPath === moduleName;
         }).readAs;
     };

@@ -5,7 +5,7 @@ module.exports = function (angus) {
     // Build an array of script tags manually
     // We can't use grunt-include-source because it does not take into account
     // the order of the libIncludes.js array in /apps/your-app/config.js
-    var libScripts = angus.appConfig.libIncludes.js
+    var libScripts = angus.appConfig.bower.filesNeeded.js
         .map(function (script) {
             return '<script src="' + (angus.appConfig.staticServerUrl || '') + 'assets/js/lib/' + script + '"></script>';
         }).join('\n');

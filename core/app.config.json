@@ -3,23 +3,10 @@
     "type": "object",
     "required": true,
     "properties": {
-        "packages": {
-            "type": "array",
-            "required": true,
-            "items": {
-                "type": "string",
-                "required": true
-            }
-        },
-        "port": {
-            "type": "number",
-            "required": true
-        },
-        "libIncludes": {
+        "bower": {
             "type": "object",
-            "required": true,
             "properties": {
-                "js": {
+                "packages": {
                     "type": "array",
                     "required": true,
                     "items": {
@@ -27,52 +14,63 @@
                         "required": true
                     }
                 },
-                "tpl": {
-                    "type": "array",
-                    "required": true,
-                    "items": {
-                        "type": "object",
-                        "required": true,
-                        "properties": {
-                            "libPath": {
-                                "type": "string",
-                                "required": true
-                            },
-                            "readAs": {
-                                "type": "string",
-                                "required": true
+                "filesNeeded": {
+                    "type": "object",
+                    "properties": {
+                        "js": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "sass": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "less": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "html": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "libPath": {
+                                        "type": "string"
+                                    },
+                                    "readAs": {
+                                        "type": "string"
+                                    }
+                                }
                             }
                         }
-                    }
-                },
-                "scss": {
-                    "type": "array",
-                    "required": true,
-                    "items": {
-                        "type": "string",
-                        "required": true
                     }
                 }
             }
         },
-        "gruntTasks": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
+
+
+        "port": {
+            "type": "number"
         },
-        "gruntTasksAdd": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
+
+        "cssCompiler": {
+            "type": "string"
         },
-        "gruntTasksIgnore": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
+
+        "testRunner": {
+            "type": "string"
         },
+
+        "usesAngularJS": {
+            "type": "boolean"
+        },
+
         "aws": {
             "type": "object",
             "properties": {
@@ -94,13 +92,9 @@
                 }
             }
         },
+
         "staticServerUrl": {
             "type": "string"
-        },
-        "constants": {
-            "type": "object",
-            "required": true,
-            "properties": {}
         }
     }
 }

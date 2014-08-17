@@ -10,11 +10,13 @@ module.exports = function (grunt, angus) {
         grunt.log.writeln('Checking if any library includes are missing...'.yellow);
 
         // Check that all libIncludes given for this app exist
-        _.union(angus.appConfig.libIncludes.js,
-            _.pluck(angus.appConfig.libIncludes.tpl, 'libPath'),
-            angus.appConfig.libIncludes.scss).forEach(function (file) {
+        _.union(angus.appConfig.bower.filesNeeded.js,
+            _.pluck(angus.appConfig.bower.filesNeeded.html, 'libPath'),
+            angus.appConfig.bower.filesNeeded.scss,
+            angus.appConfig.bower.filesNeeded.less)
+            .forEach(function (file) {
             if (!fs.existsSync(angus.appPath + '/bower_components/' + file)) {
-                grunt.fail.fatal('angus.config.js [libIncludes] bower_components/' + file + ' does not exist!');
+                grunt.fail.fatal('angus.config.js [bower.filesNeeded] bower_components/' + file + ' does not exist!');
             }
         });
 

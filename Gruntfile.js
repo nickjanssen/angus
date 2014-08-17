@@ -2,14 +2,11 @@
 
 module.exports = function (grunt) {
 
-
     var walkDir = require('walkdir');
     var path = require('path');
     var _ = require('underscore');
 
-
     require('load-grunt-tasks')(grunt);
-    grunt.loadNpmTasks('sass-import-compiler');
 
     var appPath = grunt.option('path');
 
@@ -19,10 +16,12 @@ module.exports = function (grunt) {
 
     var isWin = /^win/.test(process.platform);
     if (isWin) {
-        appPath = appPath.replace(/\\/g, "\\\\");
+        appPath = appPath.replace(/\\/g, '\\\\');
     }
 
     var appConfig = require(appPath + '/angus.config.js');
+
+    require('./core/setConfigDefaults.js')(appConfig);
 
     var angus = {
         'package': grunt.file.readJSON('package.json'),
@@ -56,38 +55,10 @@ module.exports = function (grunt) {
     ]);
 
     // This function removes or adds build tasks depending on the app config
-    var appTaskFilter = require('./core/appTaskFilter.js')(angus);
+    var buildTaskList = require('./core/buildTaskList.js');
 
-    grunt.registerTask('build_dev', [
-        'jshint',
-        'karma',
-        'ngconstant',
-        'clean:dev',
-        'copy:dev',
-        'replace:dev',
-        'html2js:libDev',
-        'html2js:dev',
-        'sass_import_compiler',
-        'sass:dev',
-        'includeSource:dev'
-    ].filter(appTaskFilter));
-
-    grunt.registerTask('build_prod', [
-        'jshint',
-        'karma',
-        'ngconstant',
-        'clean:prod',
-        'copy:prod',
-        'replace:prod',
-        'html2js:libProd',
-        'html2js:prod',
-        'sass_import_compiler',
-        'sass:prod',
-        'concat:prod',
-        'ngmin:prod',
-        'uglify:prod',
-        'includeSource:prod'
-    ].filter(appTaskFilter));
+    grunt.registerTask('build_dev', buildTaskList(angus, 'dev'));
+    grunt.registerTask('build_prod', buildTaskList(angus, 'prod'));
 
     grunt.registerTask('dev', [
         'check',

@@ -40,7 +40,7 @@ module.exports = function (angus) {
                 expand: true,
                 // flatten: true,
                 cwd: angus.appPath + '/bower_components/',
-                src: angus.appConfig.libIncludes.js,
+                src: angus.appConfig.bower.filesNeeded.js,
                 dest: angus.appPath + '/dist/dev/assets/js/lib/'
             }, {
                 expand: true,

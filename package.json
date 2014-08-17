@@ -1,6 +1,6 @@
 {
   "name": "angus",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "homepage": "http://nickjanssen.github.io/angus",
   "author": "Nick Janssen <info@nickjanssen.com> (http://nickjanssen.com/)",
   "license": "MIT",
@@ -47,8 +47,6 @@
     "grunt-ngmin": "0.0.3",
     "grunt-html2js": "^0.2.8",
     "connect-modrewrite": "^0.7.6",
-    "grunt-ng-constant": "^0.5.0",
-    "sass-import-compiler": "0.0.4",
     "underscore": "^1.6.0",
     "grunt-contrib-sass": "^0.7.3",
     "walkdir": "0.0.7",
@@ -63,7 +61,8 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "minimist": "^1.1.0",
     "shelljs": "^0.3.0",
-    "update-notifier": "^0.2.0"
+    "update-notifier": "^0.2.0",
+    "grunt-contrib-less": "^0.11.4"
   },
   "preferGlobal": true
 }

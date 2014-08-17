@@ -3,21 +3,21 @@
 module.exports = function (angus) {
 
     var filesDev = {};
-    filesDev[angus.appPath + '/dist/dev/assets/app.css'] = angus.appPath + '/src/scss/main.scss';
+    filesDev[angus.appPath + '/dist/dev/assets/app.css'] = angus.appPath + '/src/less/main.less';
 
     var filesProd = {};
-    filesProd[angus.appPath + '/dist/prod/assets/app.css'] = angus.appPath + '/src/scss/main.scss';
+    filesProd[angus.appPath + '/dist/prod/assets/app.css'] = angus.appPath + '/src/less/main.less';
 
     return {
         dev: {
             options: {
-                style: 'expanded'
+                compress: false
             },
             files: filesDev
         },
         prod: {
             options: {
-                style: 'compressed'
+                compress: true
             },
             files: filesProd
         }

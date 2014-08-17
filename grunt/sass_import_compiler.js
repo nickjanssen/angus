@@ -2,17 +2,17 @@
 
 module.exports = function (angus) {
 
-    var libScss = angus.appConfig.libIncludes.scss
+    var libScss = angus.appConfig.bower.filesNeeded.scss
         .map(function (lib) {
             return angus.appPath + '/bower_components/' + lib;
         });
 
-    var files = {};
-    files[angus.appPath + '/src/scss/_includes.scss'] = libScss;
+    var filesScss = {};
+    filesScss[angus.appPath + '/src/scss/_includes.scss'] = libScss;
 
     return {
-        all: {
-            files: files
+        scss: {
+            files: filesScss
         }
     };
 };

@@ -2,7 +2,7 @@
 
 module.exports = function (angus) {
 
-    var additionalLibs = angus.appConfig.libIncludes.js
+    var additionalLibs = angus.appConfig.bower.filesNeeded.js
     .map(function (lib) {
         return angus.appPath + '/bower_components/' + lib;
     });

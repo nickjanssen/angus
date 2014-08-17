@@ -2,93 +2,105 @@
 
 module.exports = {
 
-    // A list of bower dependencies this app will use.
-    // Each package will be installed using the command 'bower install <package>'
-    // Remember that you can also use git repo's, local folders, URL's and specify version and/or tags
-    // Please see http://bower.io/docs/api/#install for more info
-    packages: [
-        'http://code.jquery.com/jquery-2.1.0.min.js',
-        'bootstrap-sass-official'
-    ],
+    bower: {
+        /*  packages - The list of bower endpoints your app will use.
 
-    // The port this app will be accessible on
-    port: 9000,
-
-    // A list of files which this app will actually use from the bower packages above.
-    // Angus will look inside bower_components/ for these files.
-    libIncludes: {
-
-        js: [
-            'jquery-2.1.0.min/index.js'
+            Each package will be installed using the command 'bower install <package>'
+            Remember that you can also use git repo's, local folders, URL's and specify version and/or tags
+            Please see http://bower.io/docs/api/#install for more info
+        */
+        packages: [
+            'http://code.jquery.com/jquery-2.1.0.min.js',
+            'bootstrap'
         ],
+        /*  filesNeeded - A list of files your app will actually use from the bower packages you installed.
 
-        scss: [
-            // Core variables and mixins
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss',
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss',
+            Once Angus has installed the bower packages needed for your app, you need to define
+            which files you will actually need from those packages. This way, Angus can automatically include
+            them in your HTML files, generate CSS and do additional (optional) things such as AngularJS template caching.
 
-            // Reset
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_normalize.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_print.scss',
+            Angus will look inside the bower_components folder for these files.
+            You can specify `.js`, `.scss`, `.html and `.less` files here.
+        */
+        filesNeeded: {
+            js: [
+                'jquery-2.1.0.min/index.js'
+            ],
 
-            // Core CSS
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss',
-            'bootstrap-sass-official/assets/stylesheets/bootstrap/_grid.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_tables.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss',
+            less: [
+                // Core variables and mixins
+                'bootstrap/less/variables.less',
+                'bootstrap/less/mixins.less',
 
-            // Components
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_component-animations.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_glyphicons.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_dropdowns.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_breadcrumbs.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_pager.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_labels.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_badges.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_thumbnails.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_alerts.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_progress-bars.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_media.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_wells.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_close.scss',
+                // Reset
+                // 'bootstrap/less/normalize.less',
+                // 'bootstrap/less/print.less',
 
-            // Components w/ JavaScript
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_modals.scss'
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_carousel.scss',
+                // Core CSS
+                'bootstrap/less/scaffolding.less',
+                // 'bootstrap/less/type.less',
+                // 'bootstrap/less/code.less',
+                'bootstrap/less/grid.less',
+                // 'bootstrap/less/tables.less',
+                'bootstrap/less/forms.less',
+                'bootstrap/less/buttons.less',
 
-            // Utility classes
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_utilities.scss',
-            // 'bootstrap-sass-official/assets/stylesheets/bootstrap/_responsive-utilities.scss',
-        ],
+                // Components
+                // 'bootstrap/less/component-animations.less',
+                // 'bootstrap/less/glyphicons.less',
+                // 'bootstrap/less/dropdowns.less',
+                'bootstrap/less/button-groups.less',
+                // 'bootstrap/less/input-groups.less',
+                // 'bootstrap/less/navs.less',
+                // 'bootstrap/less/navbar.less',
+                // 'bootstrap/less/breadcrumbs.less',
+                // 'bootstrap/less/pagination.less',
+                // 'bootstrap/less/pager.less',
+                // 'bootstrap/less/labels.less',
+                // 'bootstrap/less/badges.less',
+                // 'bootstrap/less/jumbotron.less',
+                // 'bootstrap/less/thumbnails.less',
+                // 'bootstrap/less/alerts.less',
+                // 'bootstrap/less/progress-bars.less',
+                // 'bootstrap/less/media.less',
+                // 'bootstrap/less/list-group.less',
+                // 'bootstrap/less/panels.less',
+                // 'bootstrap/less/wells.less',
+                // 'bootstrap/less/close.less',
 
-        // Used with AngularJS apps. Be sure to enable the html2js task.
-        // Templates are an array of objects, to deal with html2js caching
-        // e.g.
-        // {
-        //     libPath: 'angular-ui/template/modal/backdrop.html',
-        //     readAs: 'template/modal/backdrop.html'
-        // }
-        tpl: []
+                // Components w/ JavaScript
+                'bootstrap/less/modals.less'
+                // 'bootstrap/less/tooltip.less',
+                // 'bootstrap/less/popovers.less',
+                // 'bootstrap/less/carousel.less',
+
+                // Utility classes
+                // 'bootstrap/less/utilities.less',
+                // 'bootstrap/less/responsive-utilities.less',
+            ]
+        }
     },
 
-    // In addition to the default task list (core/defaultTasks.js), also execute these
-    gruntTasksAdd: [
-        'karma'
-    ],
+    // The port this app will be accessible on.
+    // Defaults to 9000
+    port: 9000,
 
-    // ngconstant will parse this object and allow you to access them in your app
-    constants: {}
+    // Which CSS compiler to use. Can be 'none', 'sass' or 'less'.
+    // Defaults to 'sass'
+    cssCompiler: 'less',
+
+    // Which test runner to use. Can be 'none' or 'karma'.
+    // Defaults to 'karma'
+    testRunner: 'karma',
+
+    // Whether JsHint should check your code for errors.
+    // Note that you need a .jshintrc file in your project directory for this to work.
+    // See the example apps for a good starting point.
+    // Defaults to true
+    useJsHint: true,
+
+    // When enabled, Angus will execute a few additional tasks such as html2js, ngconstant and ngmin.
+    // Defaults to false
+    usesAngularJS: false
+
 };
