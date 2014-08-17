@@ -100,7 +100,7 @@ Instead, when you run the `angus dev` or `angus prod` command, Angus will tell B
 
 You define Bower libraries inside your `angus.config.js` using the `bower.packages` array.
 
-Most Bower packages contain different flavors of the actual library. These include a minified and/or production build, special feature builds as well libraries that are broken down into many smaller components, such as bootstrap. Using the `libIncludes` array, you can define which files you actually need from the Bower packages you install.
+Most Bower packages contain different flavors of the actual library. These include a minified and/or production build, special feature builds as well libraries that are broken down into many smaller components, such as bootstrap. Using the `filesNeeded` array, you can define which files you actually need from the Bower packages you install.
 
 ## App structure
 
