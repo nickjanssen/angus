@@ -6,8 +6,9 @@ module.exports = function (angus) {
             files: [
                 angus.appPath + '/src/**/*',
 
-                // Don't watch the scss, as we will watch the compiled CSS for a soft refresh
+                // Don't watch the scss/less, as we will watch the compiled CSS for a soft refresh
                 '!' + angus.appPath + '/src/scss/**/*',
+                '!' + angus.appPath + '/src/less/**/*',
 
                 '!' + angus.appPath + '/**/_*'
             ],
@@ -25,6 +26,13 @@ module.exports = function (angus) {
                 '!' + angus.appPath + '/**/_*'
             ],
             tasks: ['sass:dev']
+        },
+        less: {
+            files: [
+                angus.appPath + '/src/less/**/*',
+                '!' + angus.appPath + '/**/_*'
+            ],
+            tasks: ['less:dev']
         },
         livereload: {
             options: {
