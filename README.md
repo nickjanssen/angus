@@ -125,18 +125,18 @@ All JavaScript files go inside `src/` and you are free to structure them how you
 This file is the heart of your app and defines what your app needs as well as a few build options. It is a `.js` and not a `.json` file on purpose so you can add comments.
 
 It contains a few variables:
-#### `bower.packages`
+##### `bower.packages`
 A list of bower dependencies this app will use. Each package will be installed using the command 'bower install [package]'
 Remember that you can also use git repo's, local folders, URL's and specify version and/or tags.
 Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info.
 
-#### `bower.filesNeeded`
+##### `bower.filesNeeded`
 A list of files your app will actually use from the bower packages you installed. Once Angus has installed the bower packages needed for your app, you need to define which files you will actually need from those packages. This way, Angus can automatically include them in your HTML files, generate CSS and do additional (optional) things such as AngularJS template caching.
 
 Angus will look inside the bower_components folder for these files.
 You can specify `.js`, `.scss`, `.html and `.less` files here.
 
-#### `port` (optional)
+##### `port` (optional)
 The port your local server which will be listening to when running Angus. Defaults to `9000`
 
 ##### `cssCompiler` (optional)
@@ -147,10 +147,10 @@ Defaults to sass
 Which test runner to use. Can be none or karma.
 Defaults to karma
 
-#### `aws` (optional)
+##### `aws` (optional)
 If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `grunt deploy_s3` after you've set these up to deploy.
 
-#### `staticServerUrl` (optional)
+##### `staticServerUrl` (optional)
 When given, angus will prepend all static resources with this URL on production. Common usecase is to upload your static files to a CDN (e.g. Amazon S3) and then add the URL of your bucket here.
 
 Example `angus.config.js` file:
