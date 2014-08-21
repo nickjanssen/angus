@@ -75,6 +75,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('deploy_s3', [
+        'check',
         'build_prod',
         's3'
     ]);
