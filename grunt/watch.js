@@ -2,6 +2,9 @@
 
 module.exports = function (angus) {
     return {
+        options: {
+            interval: 1000
+        },
         js: {
             files: [
                 angus.appPath + '/src/**/*',
