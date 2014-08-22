@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 var cwd = process.cwd();
 var argv = require('minimist')(process.argv.slice(2));
 var updateNotifier = require('update-notifier');
@@ -24,11 +25,12 @@ if (args.length > 0) {
         else {
             var example = argv.example || 'hello-world-jquery';
 
-            cmd = 'cp -r apps/' + example + ' ' + cwd + '/' + args[1];
+            var cmd = 'cp -r apps/' + example + ' ' + cwd + '/' + args[1];
+            shell.exec(cmd);
         }
     }
     else {
-        cmd = 'grunt ' + args[0] + ' --path=' + cwd;
+        require('./core/gulpfile.js')(args, cwd);
     }
 
     if (cmd) {
@@ -43,7 +45,7 @@ else {
         'dev        Runs Angus in development mode (must be inside app directory)',
         'prod       Runs Angus in production mode (must be inside app directory)',
         '',
-        'Any other command will be parsed as a grunt task. Please see the angus/grunt/ folder for available tasks.'].join('\n'));
+        'Any other command will be parsed as a gulp task. Please see the angus/core/gulp/ folder for available tasks.'].join('\n'));
 }
 
 

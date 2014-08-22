@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Hello World</title>
 
-    <!-- include: "type": "css", "files": "./**/*.css" -->
+    <!-- autoInclude: css !-->
 
 </head>
 <body>
@@ -24,9 +24,8 @@
         </div>
     </div>
 
-    @@libScripts
+    <!-- autoInclude: jsLib !-->
+    <!-- autoInclude: jsApp !-->
 
-    <!-- include: "type": "js", "files": ["./assets/js/templates/**/*.js"], "ordering": "top-down" -->
-    <!-- include: "type": "js", "files": ["./assets/js/app/**/*.js"], "ordering": "top-down" -->
 </body>
 </html>

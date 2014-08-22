@@ -11,8 +11,19 @@ module.exports = function (appConfig) {
     appConfig.bower.filesNeeded.less = appConfig.bower.filesNeeded.less || [];
     appConfig.bower.filesNeeded.html = appConfig.bower.filesNeeded.html || [];
 
+
     appConfig.port = appConfig.port || 9000;
     appConfig.cssCompiler = appConfig.cssCompiler || 'sass';
     appConfig.testRunner = appConfig.testRunner || 'karma';
+    appConfig.useJsHint = typeof appConfig.useJsHint === 'undefined' ? true : appConfig.useJsHint;
     appConfig.usesAngularJS = appConfig.usesAngularJS || false;
+
+
+    if (appConfig.cssCompiler === 'sass') {
+        appConfig.__cssCompilerExtension = 'scss';
+    }
+    if (appConfig.cssCompiler === 'less') {
+        appConfig.__cssCompilerExtension = 'less';
+    }
+
 };

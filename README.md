@@ -1,7 +1,7 @@
 Angus
 =====
 
-One build configuration for all your web apps.
+Declarative build tool for the web.
 
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
@@ -31,22 +31,24 @@ Scaffolding tools such as Brunch and Yeoman are great, but are a headache when y
 
 Having these build steps generated for you becomes a maintenance nightmare when you want to change a step.
 
-Angus solves these problems by turning the build process into something generic and reusable. It allows you to specify libraries on a per-app basis, while still sharing the same build steps.
+Angus solves these problems by turning the build process into something generic and reusable. It simplifies your build configuration by making it declarative, telling Angus how you'd like your sandwich instead of making the sandwich yourself.
 
 ## Features
 * Pre-configured build steps for all your apps
+* Super fast using streams
 * Declarative build config
 * Framework agnostic
 * Easily define libraries your app is using
 * Integrated connect server with pushState support
 * Auto refresh when files change
 * Soft CSS refresh
-* Unit tests on every save using Karma (see `testRunner` config option)
-* Auto compile Sass or Less
-* Automatically includes scripts, templates and CSS in your `index.html`
-* Easily make a production build using `grunt prod` (minified and concatenated)
-* Deploy directly to Amazon S3 using `angus deploy_s3`
+* Built-in unit testing (see `testRunner` config option)
+* Auto-compile Sass or Less
+* Automatically references scripts, templates and CSS in your `.html` files
+* Easily make a production build using `angus prod` (minified and concatenated)
+* Deploy directly to Amazon S3 using `angus s3`
 * Serve static resources from a CDN on production
+* Unique sounds on build success and break (No more boring system beeps!)
 
 # Quick start
 Install Angus globally with npm
@@ -75,22 +77,26 @@ http://localhost:9000/
 ```
 
 ### Commands
-Internally Angus uses GruntJS to do most of the work. There are three important commands:
+Internally Angus uses GulpJS to do most of the work. The following commands can be invoked.
+**These commands are to be run from the folder which you have your app sources.**
 
 ### `angus create app-name [--example=example-name]`
-Creates an app from one of the supplied examples inside `angus/apps/`. By default, it uses `hello-world-jquery`. You can pass in `--example=example-name` to copy from a different example app.
+Creates an app from one of the supplied examples (see `angus/apps/`). By default, it uses `hello-world-jquery`. You can pass in `--example=example-name` to copy from a different example app. Send in a Pull Request for more examples!
 
-### `angus dev [--app=app-name]`
-Builds and serves a configured app for **development**. Files will not be minified nor concatenated.
+### `angus dev`
+Builds and serves your app for **development**. Files will not be minified nor concatenated.
 
-### `angus prod [--app=app-name]`
-Builds and serves a configured app for **production**. Files will be minified and concatenated.
+### `angus prod`
+Builds and serves your app for **production**. Files will be minified and concatenated.
+
+### `angus s3`
+Builds and serves your app for **production** and **deploys it to S3**. Files will be minified and concatenated. See the `aws` object below in your `angus.config.js`.
 
 For both commands, you can find the built files inside the `dist/` folder.
 
 ### How does it work?
 The idea is that Angus has all build tasks pre-configured. You simple tell Angus what your app needs and how you'd like it to be built. Think of it as a declarative approach to the build process.
-No more Gruntfile fiddling!
+No more fiddling with Grunt/Gulpfiles!
 
 ## Bower
 
@@ -110,16 +116,13 @@ hello-world/
     bower_components/
     src/
         assets/
-        scss/       <-- (Angus can also use LESS)
+        style/
             _includes.scss <-- GENERATED
             main.scss
-        *.js
+        core/
         index.html
     angus.config.js
 ```
-
-### `app.js` (example file)
-All JavaScript files go inside `src/` and you are free to structure them how you like (you can make sub folders).
 
 ### `angus.config.js`
 This file is the heart of your app and defines what your app needs as well as a few build options. It is a `.js` and not a `.json` file on purpose so you can add comments.
@@ -131,7 +134,7 @@ Remember that you can also use git repo's, local folders, URL's and specify vers
 Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info.
 
 ##### `bower.filesNeeded`
-A list of files your app will actually use from the bower packages you installed. Once Angus has installed the bower packages needed for your app, you need to define which files you will actually need from those packages. This way, Angus can automatically include them in your HTML files, generate CSS and do additional (optional) things such as AngularJS template caching.
+An object that contains a few lists of files your app will actually use from the bower packages you installed. Once Angus has installed the bower packages needed for your app, you need to define which files you will actually need from those packages. This way, Angus can automatically include them in your HTML files, generate CSS and do additional (optional) things such as AngularJS template caching.
 
 Angus will look inside the bower_components folder for these files.
 You can specify `.js`, `.scss`, `.html and `.less` files here.
@@ -147,8 +150,16 @@ Defaults to sass
 Which test runner to use. Can be none or karma.
 Defaults to karma
 
+##### `useJsHint` (optional)
+Whether or not Angus should report JSHint errors. Angus will not break when errors are found, only warn you about them.
+Defaults to true
+
+##### `usesAngularJS` (optional)
+When true, Angus will execute additional AngularJS specific tasks. These include ng-annotate and html2js.
+Defaults to false
+
 ##### `aws` (optional)
-If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `grunt deploy_s3` after you've set these up to deploy.
+If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `angus deploy_s3` after you've set these up to deploy.
 
 ##### `staticServerUrl` (optional)
 When given, angus will prepend all static resources with this URL on production. Common usecase is to upload your static files to a CDN (e.g. Amazon S3) and then add the URL of your bucket here.
@@ -182,16 +193,39 @@ module.exports = {
 ### `assets/`
 Contains all images, videos, JSON files and other data which are static to your app.
 
-### `scss/` (or `less/`)
-The folder for your sass/less files.
+### `core/`
+All JavaScript files as well as additional SCSS and HTML templates go inside `src/core/` and you are free to structure them how you like (you can make sub folders). The reason this folder is called `core/` and not `js/` is that it allows you have a modular design. You can also place SASS files as well as html templates in the same folder as your javascript, to keep things organized. Sorting your app files by type (e.g. `js`, `scss`, `html`) is generally not recommended.
 
-One special note: the `scss/` or `less/` folder also contains an `_includes` file which gets auto generated. This file contains a list of all Bower Sass/Less files you need specified inside `angus.config.js`.
+### `style/`
+The folder for your sass/less files. If you're doing modular design (which you should), component specific files should be placed inside `core/` in their respective module e.g. `core/your-module/*.scss`.
 
-### Tips
-If you're using AngularJS, I recommend that you add a `components` folder and structure your AngularJS files in there in a modularized fashion.
-Please see the [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub).
+One special note: the `style/` folder also contains an `_includes` file which gets auto generated. This file contains a list of all Bower Sass/Less files you need specified inside `angus.config.js`.
 
 ## Migrating
+### 0.3.x → 0.4.x
+Angus now uses GulpJS internally to do all its building.
+
+Your Javascript files are now placed inside a folder `src/core/` of your app. This is done to keep your app more organised by separating style, assets and core files. It is also helpful for keeping a modular design, as you can place javascript, scss and html templates together in a folder of your choice. Please see the [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub).
+
+Html templates that are converted using the html2js plugin for AngularJS apps are now placed inside a `angus.templates.lib` module instead of `templates_lib`. Likewise, regular templates are placed inside `angus.templates.app` instead of `templates`. Please update your app dependencies accordingly. **Note that when you do not have any HTML templates or you did not include any library HTML templates, these modules will not be available.**
+
+The `scss/` or `less/` folder inside your app was renamed to `style/`, to have a uniform folder name across different CSS compilers.
+
+The `deploy_s3` command was renamed to `s3`.
+
+In your `src/*.html` files (usually just `index.html`) the autoInclude syntax was changed to be consistent and easier to use:
+```
+<!-- autoInclude: css !-->
+<!-- autoInclude: jsLib !-->
+<!-- autoInclude: jsApp !-->
+```
+
+JSHint will no longer break the build when errors when found, only warn you about them (now with helpful sounds!)
+
+Angus will no longer re-install every bower package if it was already present inside `bower_components/`. This was done to have a faster build script. However, your dependencies may run out of date faster. Consider pruning your `bower_components` folder from time to time.
+
+Angus now places your compiled css file inside `assets/`. This allows you to specify images without having to use `assets/` as a prefix. For example, if you had `assets/images/foo.png` this now becomes `images/foo.png`.
+
 ### 0.2.x → 0.3.x
 The config file went through a drastic change. You can no longer specify which grunt tasks are ran manually. The idea is that the build config per app becomes declarative and as easy to use as possible. Instead, you now tell the `angus.config.js` which CSS compiler and test runner you'd like to use. You can also tell Angus whether you'd like to use JsHint and whether your app uses AngularJS for added functionality.
 
