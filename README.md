@@ -31,7 +31,7 @@ Scaffolding tools such as Brunch and Yeoman are great, but are a headache when y
 
 Having these build steps generated for you becomes a maintenance nightmare when you want to change a step.
 
-Angus solves these problems by turning the build process into something generic and reusable. It simplifies your build configuration by making it declarative, telling Angus how you'd like your sandwich instead of making the sandwich yourself.
+Angus solves these problems by turning the build process into something generic and reusable. It simplifies your build configuration by making it declarative, telling Angus how you'd like your sandwich instead of making the sandwich yourself. No more fiddling with Grunt/Gulpfiles!
 
 ## Features
 * Pre-configured build steps for all your apps
@@ -78,7 +78,7 @@ http://localhost:9000/
 
 ### Commands
 Internally Angus uses GulpJS to do most of the work. The following commands can be invoked.
-**These commands are to be run from the folder which you have your app sources.**
+**These commands are to be run from the folder which contain your app sources.**
 
 ### `angus create app-name [--example=example-name]`
 Creates an app from one of the supplied examples (see `angus/apps/`). By default, it uses `hello-world-jquery`. You can pass in `--example=example-name` to copy from a different example app. Send in a Pull Request for more examples!
@@ -93,10 +93,6 @@ Builds and serves your app for **production**. Files will be minified and concat
 Builds and serves your app for **production** and **deploys it to S3**. Files will be minified and concatenated. See the `aws` object below in your `angus.config.js`.
 
 For both commands, you can find the built files inside the `dist/` folder.
-
-### How does it work?
-The idea is that Angus has all build tasks pre-configured. You simple tell Angus what your app needs and how you'd like it to be built. Think of it as a declarative approach to the build process.
-No more fiddling with Grunt/Gulpfiles!
 
 ## Bower
 
