@@ -17,8 +17,8 @@ module.exports = function (angus, gulp) {
         'max_depth': 1
     }, function (filePath) {
         if (path.extname(filePath) === '.css') {
-            filePath = filePath.replace(angus.appPath + '/dist/', '');
-            autoInclude.css += '<link rel="stylesheet" type="text/css" href="' + filePath + '">\n    ';
+            filePath = filePath.replace(angus.appPath + path.sep + 'dist' + path.sep, '');
+            autoInclude.css += '<link rel="stylesheet" type="text/css" href="' + filePath.replace(/\\/g, '/') + '">\n    ';
         }
     });
 
@@ -34,11 +34,10 @@ module.exports = function (angus, gulp) {
     }
 
     walkDir.sync(angus.appPath + '/dist/js/', function (filePath) {
-        filePath = filePath.replace(angus.appPath + '/dist/', '');
+        filePath = filePath.replace(angus.appPath + path.sep + 'dist' + path.sep, '');
         var folders = filePath.split(path.sep);
-        if (path.extname(filePath) === '.js' &&
-            folders[1] !== 'bower_components') {
-            autoInclude.jsApp += '<script src="' + filePath + '"></script>\n    ';
+        if (path.extname(filePath) === '.js' && folders[1] !== 'bower_components') {
+            autoInclude.jsApp += '<script src="' + filePath.replace(/\\/g, '/') + '"></script>\n    ';
         }
     });
 
