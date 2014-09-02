@@ -9,7 +9,7 @@ var runSequence = require('run-sequence');
 module.exports = function (argTasks, appPath) {
 
     var appConfig = require(appPath + '/angus.config.js');
-    require('./setConfigDefaults.js')(appConfig);
+    require('./setAppConfigDefaults.js')(appConfig);
 
     var angus = {
         'package': require('../package.json'),

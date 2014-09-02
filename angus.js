@@ -1,14 +1,27 @@
 #!/usr/bin/env node
+'use strict';
 
 var cwd = process.cwd();
 var argv = require('minimist')(process.argv.slice(2));
 var updateNotifier = require('update-notifier');
 var pkg = require('./package.json');
+var fs = require('fs');
 
 updateNotifier({packageName: pkg.name, packageVersion: pkg.version}).notify();
 
-var args = argv._;
+var writeConfig = function (data) {
+    fs.writeFileSync(__dirname + '/config.json', JSON.stringify(data, null, 4));
+};
 
+if (!fs.existsSync(__dirname + '/config.json')) {
+    console.log(cwd);
+    writeConfig({});
+}
+
+var angusConfig = require('./config.json');
+require('./core/setAngusConfigDefaults.js')(angusConfig);
+
+var args = argv._;
 if (args.length > 0) {
 
     var shell = require('shelljs');
