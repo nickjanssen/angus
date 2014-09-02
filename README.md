@@ -95,7 +95,7 @@ Builds and serves your app for **production** and **deploys it to S3**. Files wi
 ### `angus sound on|off`
 Configures Angus to use sounds on build success/failure. By default disabled.
 
-For both commands, you can find the built files inside the `dist/` folder.
+The compiled files can be found inside the `dist/` folder.
 
 ## Bower
 
