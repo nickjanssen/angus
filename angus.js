@@ -42,6 +42,25 @@ if (args.length > 0) {
             shell.exec(cmd);
         }
     }
+    else if (args[0] === 'sound') {
+        if (args.length === 1) {
+            console.log(['Build sounds are currently ' + (angusConfig.sound ? 'enabled' : 'disabled') + '.',
+            '',
+            'usage: angus sound on|off'].join('\n'));
+        }
+        else if (args[1] === 'on') {
+            angusConfig.sound = true;
+            writeConfig(angusConfig);
+            var cmd = 'npm install wav speaker';
+            shell.exec(cmd);
+        }
+        else if (args[1] === 'off') {
+            angusConfig.sound = false;
+            writeConfig(angusConfig);
+            var cmd = 'npm uninstall wav speaker';
+            shell.exec(cmd);
+        }
+    }
     else {
         require('./core/gulpfile.js')(args, cwd);
     }
@@ -57,6 +76,7 @@ else {
         'create     Creates an app folder with basic structure',
         'dev        Runs Angus in development mode (must be inside app directory)',
         'prod       Runs Angus in production mode (must be inside app directory)',
+        'sound      Configure Angus to use sounds on build success/failure',
         '',
         'Any other command will be parsed as a gulp task. Please see the angus/core/gulp/ folder for available tasks.'].join('\n'));
 }

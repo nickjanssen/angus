@@ -54,8 +54,6 @@
     "gulp-watch": "^0.6.9",
     "gulp-plumber": "^0.6.4",
     "gulp-util": "^3.0.0",
-    "wav": "^0.1.2",
-    "speaker": "^0.2.1",
     "gulp-concat": "^2.3.4",
     "gulp-uglify": "^0.3.2",
     "gulp-ng-annotate": "^0.3.0",

@@ -92,6 +92,9 @@ Builds and serves your app for **production**. Files will be minified and concat
 ### `angus s3`
 Builds and serves your app for **production** and **deploys it to S3**. Files will be minified and concatenated. See the `aws` object below in your `angus.config.js`.
 
+### `angus sound on|off`
+Configures Angus to use sounds on build success/failure. By default disabled.
+
 For both commands, you can find the built files inside the `dist/` folder.
 
 ## Bower
