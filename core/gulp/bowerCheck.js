@@ -34,7 +34,7 @@ module.exports = function (angus) {
         var result = shell.exec(cmds);
 
         if (result.code !== 0) {
-            console.log(result.output.red);
+            gutil.log(gutil.colors.red(result.output));
             playSound('break');
             setTimeout(process.exit, 100);
         }
