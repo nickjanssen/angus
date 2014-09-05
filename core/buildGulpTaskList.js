@@ -8,6 +8,7 @@ module.exports = function (angus, context) {
 
     if (context.indexOf('check') !== -1) {
         taskList.push('checkConfig');
+        taskList.push('depCheck');
         taskList.push('bowerCheck');
         taskList.push('checkFilesNeeded');
     }
