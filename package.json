@@ -1,10 +1,10 @@
 {
   "name": "angus",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "homepage": "http://nickjanssen.github.io/angus",
   "author": "Nick Janssen <info@nickjanssen.com> (http://nickjanssen.com/)",
   "license": "MIT",
-  "description": "One build configuration for all your web apps.",
+  "description": "Declarative build tool for the web.",
   "bugs": "https://github.com/nickjanssen/angus/issues",
   "repository": {
     "type": "git",
