@@ -6,6 +6,7 @@ var argv = require('minimist')(process.argv.slice(2));
 var updateNotifier = require('update-notifier');
 var pkg = require('./package.json');
 var fs = require('fs');
+var gulp = require('gulp');
 
 updateNotifier({packageName: pkg.name, packageVersion: pkg.version}).notify();
 
@@ -38,8 +39,8 @@ if (args.length > 0) {
         else {
             var example = argv.example || 'hello-world-jquery';
 
-            var cmd = 'cp -r apps/' + example + ' ' + cwd + '/' + args[1];
-            shell.exec(cmd);
+            gulp.src('apps/' + example + '/**/*', {dot: true})
+                .pipe(gulp.dest(args[1], {cwd: cwd}));
         }
     }
     else if (args[0] === 'sound') {
