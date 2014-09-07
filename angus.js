@@ -7,6 +7,7 @@ var updateNotifier = require('update-notifier');
 var pkg = require('./package.json');
 var fs = require('fs');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 
 updateNotifier({packageName: pkg.name, packageVersion: pkg.version}).notify();
 
@@ -63,7 +64,13 @@ if (args.length > 0) {
         }
     }
     else {
+        var angusLocation = cwd + '/angus.config.js';
+        if (fs.existsSync(angusLocation)) {
         require('./core/gulpfile.js')(args, cwd);
+        } else {
+            gutil.log(gutil.colors.red('angus.config.js was not found! Please check that you are in a valid angus directory.'));
+            gutil.log(gutil.colors.yellow('If you would like to create an angus application, see the ') + gutil.colors.magenta('angus create') + gutil.colors.yellow(' command.'));
+        }
     }
 
     if (cmd) {
