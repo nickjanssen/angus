@@ -48,7 +48,11 @@ module.exports = function (angus, context) {
 
         if (context.indexOf('js') !== -1 && angus.env === 'dev') {
             subTaskList.push('jsApp');
-            subTaskList.push('jsLib');
+
+            // Only copy JS libraries if there are any, otherwise gulp fails with an empty stream
+            if (cfg.bower.filesNeeded.js.length) {
+                subTaskList.push('jsLib');
+            }
 
             if (cfg.usesAngularJS) {
                 subTaskList.push('templatesLib');
