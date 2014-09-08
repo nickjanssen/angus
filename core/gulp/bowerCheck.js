@@ -24,7 +24,7 @@ module.exports = function (angus) {
                 return !found;
             })
             .map(function (pkg) {
-                return 'bower install ' + pkg + ' --allow-root';
+                return 'bower install ' + pkg + ' --allow-root --force-latest';
             });
 
         // packageCommands.unshift('rm -rf bower_components');
