@@ -4,7 +4,10 @@ var ngHtml2Js = require('gulp-ng-html2js');
 
 module.exports = {
     jsApp: function (angus, gulp) {
-        return gulp.src(angus.appPath + '/src/core/**/*.js', {
+        return gulp.src([
+                angus.appPath + '/src/core/**/*.js',
+                '!' + angus.appPath + '/src/core/**/*.e2e.*.js'
+            ], {
             base: angus.appPath + '/src/'
         });
     },
