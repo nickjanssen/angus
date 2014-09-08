@@ -27,14 +27,9 @@ module.exports = function (angus) {
         }
 
         if (angus.appConfig.cssCompiler === 'sass') {
-            if (!shell.which('ruby') || !shell.which('compass')) {
-                gutil.log(gutil.colors.cyan('Your app is using a Sass compiler, which requires that you install both Ruby and Compass.'));
-                if (!shell.which('ruby')) {
-                    gutil.log(gutil.colors.red('Ruby could not be found, please install it.'));
-                }
-                if (!shell.which('compass')) {
-                    gutil.log(gutil.colors.red('Compass could not be found, please install it.'));
-                }
+            if (!shell.which('sass')) {
+                gutil.log(gutil.colors.cyan('Your app is using a Sass compiler, which requires that you install Sass.'));
+                gutil.log(gutil.colors.red('Sass could not be found, please install it.'));
                 playSound('break');
                 setTimeout(process.exit, 100);
                 error = true;
