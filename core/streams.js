@@ -6,7 +6,8 @@ module.exports = {
     jsApp: function (angus, gulp) {
         return gulp.src([
                 angus.appPath + '/src/core/**/*.js',
-                '!' + angus.appPath + '/src/core/**/*.e2e.*.js'
+                '!' + angus.appPath + '/src/core/**/*.e2e.*.js',
+                '!' + angus.appPath + '/src/core/**/*.unit.*.js'
             ], {
             base: angus.appPath + '/src/'
         });
