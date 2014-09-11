@@ -4,6 +4,9 @@ module.exports = function (appConfig) {
 
     appConfig.bower = appConfig.bower || {};
 
+    appConfig.bower.packages = appConfig.bower.packages || [];
+    appConfig.bower.localFolders = appConfig.bower.localFolders || [];
+
     appConfig.bower.filesNeeded = appConfig.bower.filesNeeded || {};
 
     appConfig.bower.filesNeeded.js = appConfig.bower.filesNeeded.js || [];
