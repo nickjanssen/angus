@@ -48,6 +48,12 @@
                                     }
                                 }
                             }
+                        },
+                        "assets": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         }
                     }
                 }

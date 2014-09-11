@@ -44,6 +44,10 @@ module.exports = function (angus, context) {
 
         if (context.indexOf('assets') !== -1) {
             subTaskList.push('assets');
+
+            if (cfg.bower.filesNeeded.assets.length) {
+                subTaskList.push('assetsLib');
+            }
         }
 
         if (context.indexOf('js') !== -1 && angus.env === 'dev') {

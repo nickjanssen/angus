@@ -10,6 +10,7 @@ module.exports = function (appConfig) {
     appConfig.bower.filesNeeded.scss = appConfig.bower.filesNeeded.scss || [];
     appConfig.bower.filesNeeded.less = appConfig.bower.filesNeeded.less || [];
     appConfig.bower.filesNeeded.html = appConfig.bower.filesNeeded.html || [];
+    appConfig.bower.filesNeeded.assets = appConfig.bower.filesNeeded.assets || [];
 
 
     appConfig.port = appConfig.port || 9000;

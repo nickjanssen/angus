@@ -19,6 +19,13 @@ module.exports = {
             base: angus.appPath + '/'
         });
     },
+    assetsLib: function (angus, gulp) {
+        return gulp.src(angus.appConfig.bower.filesNeeded.assets.map(function (filePath) {
+            return angus.appPath + '/bower_components/' + filePath;
+        }), {
+            base: angus.appPath + '/bower_components/'
+        });
+    },
     templatesApp: function (angus, gulp) {
         return gulp.src([
                 angus.appPath + '/src/**/*.html',
