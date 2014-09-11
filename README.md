@@ -1,7 +1,7 @@
 Angus
 =====
 
-Declarative build tool for the web.
+A declarative build tool for the web, favoring [convention over configuration](http://en.wikipedia.org/wiki/Convention_over_configuration).
 
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
@@ -29,12 +29,12 @@ Scaffolding tools such as Brunch and Yeoman are great, but are a headache when y
 * Run a webserver to test out your app locally
 * Watch for code changes and re-build
 
-Having these build steps generated for you becomes a maintenance nightmare when you want to change a step.
+Having these build steps generated for you becomes a maintenance nightmare when you want to change something.
 
 Angus solves these problems by turning the build process into something generic and reusable. It simplifies your build configuration by making it declarative, telling Angus how you'd like your sandwich instead of making the sandwich yourself. No more fiddling with Grunt/Gulpfiles!
 
 ## Features
-* Pre-configured build steps for all your apps
+* Pre-configured build system
 * Super fast using streams
 * Declarative build config
 * Framework agnostic
@@ -136,26 +136,33 @@ Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info
 An object that contains a few lists of files your app will actually use from the bower packages you installed. Once Angus has installed the bower packages needed for your app, you need to define which files you will actually need from those packages. This way, Angus can automatically include them in your HTML files, generate CSS and do additional (optional) things such as AngularJS template caching.
 
 Angus will look inside the bower_components folder for these files.
-You can specify `.js`, `.scss`, `.html and `.less` files here.
+You can specify `.js`, `.scss`, `.html and `.less` files here. You can also specify asset files using the `assets` array. These assets will then be copied from the bower package into your `assets/` folder.
+
+Note that you can use wildcards and exclamation marks (e.g. `my-app/**/*.js` and `!my-app/not-this-file.js`).
+
+##### `bower.localFolders` (optional)
+An array of folders in your root app directory. These folders will be symlinked to `bower_components/<folder>`, allowing you to specify additional local library files that need to be loaded using the `bower.filesNeeded` object.
+
+For example, if you had a `customers/` folder with separate configuration JS files, you could simply add this folder `bower.localFolders = ['customers']` and then reference them inside `bower.filesNeeded.js` (e.g. `customers/disney/config.js`) so your app loads the file automatically in the order you specified.
 
 ##### `port` (optional)
 The port your local server which will be listening to when running Angus. Defaults to `9000`
 
 ##### `cssCompiler` (optional)
-Which CSS compiler to use. Can be none, sass or less.
-Defaults to sass
+Which CSS compiler to use. Can be `none`, `sass` or `less`.
+Defaults to `sass`
 
 ##### `testRunner` (optional)
-Which test runner to use. Can be none or karma.
-Defaults to karma
+Which test runner to use. Can be `none` or `karma`.
+Defaults to `karma`
 
 ##### `useJsHint` (optional)
 Whether or not Angus should report JSHint errors. Angus will not break when errors are found, only warn you about them.
-Defaults to true
+Defaults to `true`
 
 ##### `usesAngularJS` (optional)
-When true, Angus will execute additional AngularJS specific tasks. These include ng-annotate and html2js.
-Defaults to false
+When true, Angus will execute additional AngularJS specific tasks. These include `ng-annotate` and `html2js`.
+Defaults to `false
 
 ##### `aws` (optional)
 If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `angus deploy_s3` after you've set these up to deploy.
