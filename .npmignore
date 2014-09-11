@@ -4,3 +4,4 @@ build.xml
 .sass-cache
 node_modules
 *.sublime*
+config.json
