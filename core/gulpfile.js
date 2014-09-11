@@ -10,6 +10,7 @@ module.exports = function (argTasks, appPath) {
 
     var appConfig = require(appPath + '/angus.config.js');
     require('./setAppConfigDefaults.js')(appConfig);
+    require('./buildFilePaths.js')(appConfig, appPath);
 
     var angus = {
         'package': require('../package.json'),
