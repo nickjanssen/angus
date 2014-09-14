@@ -37,7 +37,6 @@
         "by"
     ],
     "globals": {
-        "cc": true,
         "angular": false,
         "window": true,
         "document": true
