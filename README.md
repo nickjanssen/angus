@@ -5,6 +5,10 @@ A declarative build tool for the web, favoring [convention over configuration](h
 
 ![angus logo](http://i.imgur.com/NY8t6v2.jpg)
 
+## Slides
+
+Check out this [slides presentation](http://slides.com/nickjanssen/declarative-build-configurations) of what Angus is all about!
+
 ## Table Of Contents
 
 * <a href="#introduction">Introduction</a>
