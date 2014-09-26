@@ -83,6 +83,7 @@ http://localhost:9000/
 ### Commands
 Internally Angus uses GulpJS to do most of the work. The following commands can be invoked.
 **These commands are to be run from the folder which contain your app sources.**
+**Also, depending on your system, you may need to use `sudo` in front.**
 
 ### `angus create app-name [--example=example-name]`
 Creates an app from one of the supplied examples (see `angus/apps/`). By default, it uses `hello-world-jquery`. You can pass in `--example=example-name` to copy from a different example app. Send in a Pull Request for more examples!
