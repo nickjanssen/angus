@@ -21,7 +21,7 @@ module.exports = function (angus) {
                 var version = null;
 
                 // Check if there is a version available
-                if (pkg.indexOf('@') !== -1) {
+                if (pkg.indexOf('@') !== -1 && pkg.indexOf('=') === -1) {
                     var pkgArr = pkg.split('@');
                     pkg = pkgArr[0];
                     version = pkgArr[1];
