@@ -5,6 +5,7 @@ var fs = require('fs');
 var playSound = require('../playSound.js');
 var gutil = require('gulp-util');
 var mkdirp = require('mkdirp');
+var path = require('path');
 
 module.exports = function (angus) {
     return function (cb) {
@@ -45,14 +46,14 @@ module.exports = function (angus) {
 
                 // First, try to copy a folder locally if it can be found
                 if (fs.existsSync(angus.appPath + '/' + folder)) {
-                    if (fs.existsSync(angus.appPath + '/bower_components/' + folder)) {
+                    if (fs.existsSync(angus.appPath + '/bower_components/' + path.basename(folder))) {
                         gutil.log(gutil.colors.magenta(folder) + gutil.colors.green(' is already installed, skipping'));
                     }
                     else {
                         gutil.log(gutil.colors.yellow('Installing local folder ') + gutil.colors.magenta(folder));
 
-                        mkdirp.sync(angus.appPath + '/bower_components/' + folder + '/../');
-                        fs.symlinkSync(angus.appPath + '/' + folder, angus.appPath + '/bower_components/' + folder, 'dir');
+                        mkdirp.sync(angus.appPath + '/bower_components/');
+                        fs.symlinkSync(angus.appPath + '/' + folder, angus.appPath + '/bower_components/' + path.basename(folder), 'dir');
                     }
                 }
                 else {
