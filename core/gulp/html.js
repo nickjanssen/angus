@@ -46,6 +46,7 @@ module.exports = function (angus, gulp) {
             .pipe(replace(/<!-- autoInclude: css !-->/g, autoInclude.css))
             .pipe(replace(/<!-- autoInclude: jsLib !-->/g, autoInclude.jsLib))
             .pipe(replace(/<!-- autoInclude: jsApp !-->/g, autoInclude.jsApp))
+            .pipe(replace(/@@minified/g, angus.env === 'dev' ? '' : '.min'))
             .pipe(gulp.dest(angus.appPath + '/dist'))
             .pipe(connect.reload());
     };
