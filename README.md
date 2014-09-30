@@ -134,8 +134,9 @@ This file is the heart of your app and defines what your app needs as well as a 
 It contains a few variables:
 ##### `bower.packages`
 A list of bower dependencies this app will use. Each package will be installed using the command 'bower install [package]'
-Remember that you can also use git repo's, local folders, URL's and specify version and/or tags.
+Remember that you can also use git repo's, URL's and specify version and/or tags.
 Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info.
+If you wish to use local library folders, please see `bower.localFolders` below.
 
 ##### `bower.filesNeeded`
 An object that contains arrays of files your app will actually use from the bower packages you installed. Once Angus has installed the bower packages needed for your app, you need to define which files you will actually need from those packages. This way, Angus can automatically include them in your HTML files, generate CSS and do additional (optional) things such as AngularJS template caching.
