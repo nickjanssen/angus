@@ -13,6 +13,14 @@ module.exports = function (angus, gulp) {
         jsApp: ''
     };
 
+    if (angus.env !== 'prod') {
+        autoInclude.css = angus.appConfig.bower.filesNeeded.css
+        .map(function (filePath) {
+            filePath = 'assets/bower_components/' + filePath;
+            return '<link rel="stylesheet" type="text/css" href="' + filePath + '">';
+        }).join('\n    ');
+    }
+
     walkDir.sync(angus.appPath + '/dist/assets/', {
         'max_depth': 1
     }, function (filePath) {

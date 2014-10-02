@@ -20,6 +20,7 @@ module.exports = function (angus) {
                 return tpl.libPath;
             }),
             angus.appConfig.bower.filesNeeded.scss,
+            angus.appConfig.bower.filesNeeded.css,
             angus.appConfig.bower.filesNeeded.less)
             .forEach(function (file) {
                 if (!fs.existsSync(angus.appPath + '/bower_components/' + file)) {

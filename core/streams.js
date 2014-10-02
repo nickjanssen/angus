@@ -1,6 +1,7 @@
 'use strict';
 
 var ngHtml2Js = require('gulp-ng-html2js');
+var streamqueue = require('streamqueue');
 
 module.exports = {
     jsApp: function (angus, gulp) {
@@ -55,5 +56,27 @@ module.exports = {
                     return url;
                 }
             }));
-    }
+    },
+    css: function (angus, gulp) {
+        var cssLibFiles = angus.appConfig.bower.filesNeeded.css.map(function(filePath) {
+            return angus.appPath + '/bower_components/' + filePath;
+        });
+        return streamqueue({
+                objectMode: true
+            },
+            gulp.src(cssLibFiles, {
+                base: angus.appPath
+            }),
+            gulp.src([
+                angus.appPath + '/src/style/**/*.css'
+            ], {
+                base: angus.appPath + '/src/style/'
+            }),
+            gulp.src([
+                angus.appPath + '/src/core/**/*.css'
+            ], {
+                base: angus.appPath + '/src/core/'
+            })
+        );
+    },
 };

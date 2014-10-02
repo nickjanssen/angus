@@ -142,7 +142,7 @@ If you wish to use local library folders, please see `bower.localFolders` below.
 An object that contains arrays of files your app will actually use from the bower packages you installed. Once Angus has installed the bower packages needed for your app, you need to define which files you will actually need from those packages. This way, Angus can automatically include them in your HTML files, generate CSS and do additional (optional) things such as AngularJS template caching.
 
 Angus will look inside the bower_components folder for these files.
-You can specify `.js`, `.scss`, `.html` and `.less` files here. You can also specify asset files using the `assets` array. These assets will then be copied from the bower package into your `assets/` folder.
+You can specify `.js`, `.css`, `.scss`, `.less` and `.html` files here. You can also specify asset files using an `assets` array. These assets will then be copied from the bower package into your `assets/` folder.
 
 Note that you can use wildcards and exclamation marks (e.g. `my-app/**/*.js` and `!my-app/not-this-file.js`).
 
@@ -209,9 +209,9 @@ Contains all images, videos, JSON files and other data which are static to your 
 All JavaScript files as well as additional SCSS and HTML templates go inside `src/core/` and you are free to structure them how you like (you can make sub folders). The reason this folder is called `core/` and not `js/` is that it allows you have a modular design. You can also place SASS files as well as html templates in the same folder as your javascript, to keep things organized. Sorting your app files by type (e.g. `js`, `scss`, `html`) is generally not recommended.
 
 ### `style/`
-The folder for your sass/less files. If you're doing modular design (which you should), component specific files should be placed inside `core/` in their respective module e.g. `core/your-module/*.scss`.
+The folder for your css/sass/less files. If you're doing modular design (which you should), component specific files should be placed inside `core/` in their respective module e.g. `core/your-module/*.scss`.
 
-One special note: the `style/` folder also contains an `_includes` file which gets auto generated. This file contains a list of all Bower Sass/Less files you need specified inside `angus.config.js`.
+One special note (Only for Sass/Less users): the `style/` folder also contains an `_includes` file which gets auto generated. This file contains a list of all Bower Sass/Less files you need specified inside `angus.config.js`.
 
 ## Migrating
 ### 0.3.x → 0.4.x

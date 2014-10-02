@@ -75,6 +75,9 @@ module.exports = function (angus, context) {
             else if (cfg.cssCompiler === 'less') {
                 subTaskList.push('less');
             }
+            else if (cfg.cssCompiler === 'none') {
+                subTaskList.push('css');
+            }
         }
 
         if (subTaskList.length) {
