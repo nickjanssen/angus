@@ -27,6 +27,11 @@ module.exports = function (angus) {
                     pkg = pkgArr[0];
                     version = pkgArr[1];
                 }
+                else if (pkg.indexOf('#') !== -1 && pkg.indexOf('=') === -1) {
+                    var pkgArr = pkg.split('#');
+                    pkg = pkgArr[0];
+                    version = pkgArr[1];
+                }
 
                 if (fs.existsSync(angus.appPath + '/bower_components/' + pkg)) {
                     gutil.log(gutil.colors.magenta(pkg) + gutil.colors.green(' is already installed, skipping'));
@@ -36,7 +41,7 @@ module.exports = function (angus) {
                     packageCommands.push('bower install ' + pkg + ' --allow-root --force-latest');
                 }
 
-            })
+            });
 
         var foldersNotFound = [];
 
