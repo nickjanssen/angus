@@ -51,6 +51,11 @@ module.exports = function (angus, context) {
         }
 
         if (context.indexOf('js') !== -1 && angus.env === 'dev') {
+
+            if (cfg.usesCoffeeScript) {
+                subTaskList.push('coffee');
+            }
+
             subTaskList.push('jsApp');
 
             // Only copy JS libraries if there are any, otherwise gulp fails with an empty stream

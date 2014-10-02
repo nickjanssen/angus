@@ -53,6 +53,7 @@ Angus solves these problems by turning the build process into something generic 
 * Deploy directly to Amazon S3 using `angus s3`
 * Serve static resources from a CDN on production
 * Unique sounds on build success and break (No more boring system beeps!)
+* CoffeeScript support
 
 # Quick start
 Install Angus globally with npm
@@ -168,6 +169,10 @@ Defaults to `true`
 
 ##### `usesAngularJS` (optional)
 When true, Angus will execute additional AngularJS specific tasks. These include `ng-annotate` and `html2js`.
+Defaults to `false
+
+##### `usesCoffeeScript` (optional)
+When true, Angus will also compile `.coffee` files inside your `core/` folder.
 Defaults to `false
 
 ##### `aws` (optional)

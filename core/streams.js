@@ -13,6 +13,15 @@ module.exports = {
             base: angus.appPath + '/src/'
         });
     },
+    coffeeApp: function (angus, gulp) {
+        return gulp.src([
+                angus.appPath + '/src/core/**/*.coffee',
+                '!' + angus.appPath + '/src/core/**/*.e2e.*.coffee',
+                '!' + angus.appPath + '/src/core/**/*.unit.*.coffee'
+            ], {
+            base: angus.appPath + '/src/'
+        });
+    },
     jsLib: function (angus, gulp) {
         return gulp.src(angus.appConfig.bower.filesNeeded.js.map(function (filePath) {
             return angus.appPath + '/bower_components/' + filePath;
