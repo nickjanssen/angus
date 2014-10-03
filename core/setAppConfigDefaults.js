@@ -22,6 +22,7 @@ module.exports = function (appConfig) {
     appConfig.testRunner = appConfig.testRunner || 'karma';
     appConfig.useJsHint = typeof appConfig.useJsHint === 'undefined' ? true : appConfig.useJsHint;
     appConfig.usesAngularJS = appConfig.usesAngularJS || false;
+    appConfig.usesCoffeeScript = appConfig.usesCoffeeScript || false;
 
 
     if (appConfig.cssCompiler === 'sass') {
