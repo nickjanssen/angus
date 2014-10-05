@@ -66,6 +66,10 @@ module.exports = function (angus, context) {
             if (cfg.usesAngularJS) {
                 subTaskList.push('templatesLib');
                 subTaskList.push('templatesApp');
+
+                if (cfg.constants) {
+                    subTaskList.push('constants');
+                }
             }
         }
 
