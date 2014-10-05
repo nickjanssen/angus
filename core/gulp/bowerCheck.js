@@ -27,8 +27,15 @@ module.exports = function (angus) {
                     pkg = pkgArr[0];
                     version = pkgArr[1];
                 }
+                // Support for tags
                 else if (pkg.indexOf('#') !== -1 && pkg.indexOf('=') === -1) {
                     var pkgArr = pkg.split('#');
+                    pkg = pkgArr[0];
+                    version = pkgArr[1];
+                }
+                // Support for readAs packages using '='
+                else if (pkg.indexOf('=') !== -1) {
+                    var pkgArr = pkg.split('=');
                     pkg = pkgArr[0];
                     version = pkgArr[1];
                 }
