@@ -176,7 +176,7 @@ When true, Angus will also compile `.coffee` files inside your `core/` folder.
 Defaults to `false
 
 ##### `aws` (optional)
-If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `angus deploy_s3` after you've set these up to deploy.
+If you wish to be able to deploy to Amazon S3, you can add the `aws` object which contains these variables: `key`, `secret`, `bucket` and `region`. Run `angus s3` after you've set these up to deploy.
 
 ##### `staticServerUrl` (optional)
 When given, angus will prepend all static resources with this URL on production. Common usecase is to upload your static files to a CDN (e.g. Amazon S3) and then add the URL of your bucket here.
