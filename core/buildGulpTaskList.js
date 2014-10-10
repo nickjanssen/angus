@@ -66,15 +66,15 @@ module.exports = function (angus, context) {
             if (cfg.usesAngularJS) {
                 subTaskList.push('templatesLib');
                 subTaskList.push('templatesApp');
-
-                if (cfg.constants) {
-                    subTaskList.push('constants');
-                }
             }
         }
 
         if (context.indexOf('js') !== -1 && angus.env === 'prod') {
             subTaskList.push('jsProd');
+        }
+
+        if (cfg.usesAngularJS && context.indexOf('js') !== -1 && cfg.constants) {
+            subTaskList.push('constants');
         }
 
         if (context.indexOf('css') !== -1) {
