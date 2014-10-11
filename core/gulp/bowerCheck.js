@@ -19,8 +19,34 @@ module.exports = function (angus) {
 
         angus.appConfig.npm.packages
             .forEach(function (pkg) {
-                gutil.log(gutil.colors.yellow('Installing package ') + gutil.colors.magenta(pkg));
-                packageCommands.push('npm install ' + pkg + '');
+                var version = null;
+
+                // Check if there is a version available
+                if (pkg.indexOf('@') !== -1 && pkg.indexOf('=') === -1) {
+                    var pkgArr = pkg.split('@');
+                    pkg = pkgArr[0];
+                    version = pkgArr[1];
+                }
+                // Support for tags
+                else if (pkg.indexOf('#') !== -1 && pkg.indexOf('=') === -1) {
+                    var pkgArr = pkg.split('#');
+                    pkg = pkgArr[0];
+                    version = pkgArr[1];
+                }
+                // Support for readAs packages using '='
+                else if (pkg.indexOf('=') !== -1) {
+                    var pkgArr = pkg.split('=');
+                    pkg = pkgArr[0];
+                    version = pkgArr[1];
+                }
+
+                if (fs.existsSync(angus.appPath + '/node_modules/' + pkg)) {
+                    gutil.log(gutil.colors.magenta(pkg) + gutil.colors.green(' is already installed, skipping'));
+                }
+                else {
+                    gutil.log(gutil.colors.yellow('Installing package ') + gutil.colors.magenta(pkg));
+                    packageCommands.push('npm install ' + pkg + '');
+                }
             });
 
         gutil.log(gutil.colors.yellow('Installing Bower packages...'));
