@@ -10,11 +10,20 @@ var path = require('path');
 module.exports = function (angus) {
     return function (cb) {
 
-        gutil.log(gutil.colors.yellow('Installing Bower packages...'));
 
         var packageCommands = [];
 
         packageCommands.push('cd ' + angus.appPath);
+
+        gutil.log(gutil.colors.yellow('Installing NPM packages...'));
+
+        angus.appConfig.npm.packages
+            .forEach(function (pkg) {
+                gutil.log(gutil.colors.yellow('Installing package ') + gutil.colors.magenta(pkg));
+                packageCommands.push('npm install ' + pkg + '');
+            });
+
+        gutil.log(gutil.colors.yellow('Installing Bower packages...'));
 
         angus.appConfig.bower.packages
             .forEach(function (pkg) {

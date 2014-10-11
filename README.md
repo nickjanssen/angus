@@ -226,6 +226,8 @@ One special note (Only for Sass/Less users): the `style/` folder also contains a
 
 You can now add a `tasks/` folder in your app, to start custom tasks. These tasks are in the same format as tasks in the angus repository. Take a look at the current [angus tasks](https://github.com/nickjanssen/angus/tree/master/core/gulp) as reference. Once you add a file in your app's `tasks/` folder, they will be picked up by angus. You can then execute that task by its filename. For instance, if you added a file called `icedCoffee.js` you'd run the command `angus icedCoffee` to execute it.
 
+Should your custom tasks require NPM dependencies, you can now make use of the `npm.packages` entry in `angus.config.js`. You may also use a conventional `package.json` file to manage your dependencies if you wish to execute `npm install` yourself.
+
 Currently there is no way yet to integrate custom tasks into the normal angus build flow, as it's hard to tell angus when exactly to execute which tasks without making a complicated config file. If you can come up with an elegant solution please make an issue.
 
 ## Migrating

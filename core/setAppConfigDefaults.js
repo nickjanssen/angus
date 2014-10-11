@@ -2,6 +2,9 @@
 
 module.exports = function (appConfig) {
 
+    appConfig.npm = appConfig.npm || {};
+    appConfig.npm.packages = appConfig.npm.packages || [];
+
     appConfig.bower = appConfig.bower || {};
 
     appConfig.bower.packages = appConfig.bower.packages || [];
