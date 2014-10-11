@@ -10,7 +10,7 @@ module.exports = function (angus, gulp) {
     var watchTasks = [
         {
             blob: angus.appPath + '/src/assets/**/*',
-            tags: ['assets']
+            tags: ['assets', 'html']
         },
         {
             blob: angus.appPath + '/src/*.html',
