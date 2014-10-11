@@ -17,7 +17,7 @@ Check out this [slides presentation](http://slides.com/nickjanssen/declarative-b
 * <a href="#commands">Commands</a>
 * <a href="#bower">Bower</a>
 * <a href="#app-structure">App Structure</a>
-* <a href="#tips">Tips</a>
+* <a href="#custom-tasks">Custom Tasks</a>
 * <a href="#migrating">Migrating</a>
 
 ## Introduction
@@ -54,6 +54,7 @@ Angus solves these problems by turning the build process into something generic 
 * Serve static resources from a CDN on production
 * Unique sounds on build success and break (No more boring system beeps!)
 * CoffeeScript support
+* Custom tasks
 
 # Quick start
 Install Angus globally with npm
@@ -134,7 +135,7 @@ This file is the heart of your app and defines what your app needs as well as a 
 
 It contains a few variables:
 ##### `bower.packages`
-A list of bower dependencies this app will use. Each package will be installed using the command 'bower install [package]'
+A list of bower dependencies this app will use. Each package will be installed using the command 'bower install [package]'.
 Remember that you can also use git repo's, URL's and specify version and/or tags.
 Please see the [Bower API docs](http://bower.io/docs/api/#install) for more info.
 If you wish to use local library folders, please see `bower.localFolders` below.
@@ -151,6 +152,9 @@ Note that you can use wildcards and exclamation marks (e.g. `my-app/**/*.js` and
 An array of folders in your root app directory. These folders will be symlinked to `bower_components/<folder>`, allowing you to specify additional local library files that need to be loaded using the `bower.filesNeeded` object.
 
 For example, if you had a `customers/` folder with separate configuration JS files, you could simply add this folder `bower.localFolders = ['customers']` and then reference them inside `bower.filesNeeded.js` (e.g. `customers/disney/config.js`) so your app loads the file automatically in the order you specified.
+
+##### `npm.packages` (optional, experimental)
+A list of NPM packages this app will use. Each package will be installed using the command 'npm install [package]'.
 
 ##### `port` (optional)
 The port your local server which will be listening to when running Angus. Defaults to `9000`
@@ -217,6 +221,12 @@ All JavaScript files as well as additional SCSS and HTML templates go inside `sr
 The folder for your css/sass/less files. If you're doing modular design (which you should), component specific files should be placed inside `core/` in their respective module e.g. `core/your-module/*.scss`.
 
 One special note (Only for Sass/Less users): the `style/` folder also contains an `_includes` file which gets auto generated. This file contains a list of all Bower Sass/Less files you need specified inside `angus.config.js`.
+
+## Custom Tasks
+
+You can now add a `tasks/` folder in your app, to start custom tasks. These tasks are in the same format as tasks in the angus repository. Take a look at the current [angus tasks](https://github.com/nickjanssen/angus/tree/master/core/gulp) as reference. Once you add a file in your app's `tasks/` folder, they will be picked up by angus. You can then execute that task by its filename. For instance, if you added a file called `icedCoffee.js` you'd run the command `angus icedCoffee` to execute it.
+
+Currently there is no way yet to integrate custom tasks into the normal angus build flow, as it's hard to tell angus when exactly to execute which tasks without making a complicated config file. If you can come up with an elegant solution please make an issue.
 
 ## Migrating
 ### 0.3.x → 0.4.x

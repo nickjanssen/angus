@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var walkDir = require('walkdir');
+var fs = require('fs');
 var path = require('path');
 var runSequence = require('run-sequence');
 
@@ -27,6 +28,17 @@ module.exports = function (argTasks, appPath) {
             return require(filePath)(angus, gulp)(cb);
         });
     });
+
+    // Load app tasks which can be run using `angus <task>` from that app directory
+    if (fs.existsSync(appPath + '/tasks/')) {
+        walkDir.sync(appPath + '/tasks/', function (filePath) {
+            var name = path.basename(filePath, '.js');
+            gulp.task(name, function (cb) {
+                gutil.log(gutil.colors.cyan('Running app task: ') + gutil.colors.blue(name));
+                return require(filePath)(angus, gulp)(cb);
+            });
+        });
+    }
 
     var fullBuildTags = [
         'check',
