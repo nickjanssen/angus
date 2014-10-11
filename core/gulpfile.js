@@ -28,7 +28,7 @@ module.exports = function (argTasks, appPath) {
         });
     });
 
-    var fullBuildTasks = [
+    var fullBuildTags = [
         'check',
         'js',
         'clean',
@@ -41,17 +41,17 @@ module.exports = function (argTasks, appPath) {
         {
             name: 'dev',
             env: 'dev',
-            tags: fullBuildTasks.concat(['serve'])
+            tags: fullBuildTags.concat(['serve'])
         },
         {
             name: 'prod',
             env: 'prod',
-            tags: fullBuildTasks.concat(['serve'])
+            tags: fullBuildTags.concat(['serve'])
         },
         {
             name: 's3',
             env: 'prod',
-            tags: fullBuildTasks.concat(['s3'])
+            tags: fullBuildTags.concat(['s3'])
         }
     ];
 
