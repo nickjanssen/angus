@@ -68,7 +68,7 @@ if (args.length > 0) {
 
         var angusLocation = cwd + '/angus.config.js';
         if (fs.existsSync(angusLocation)) {
-            require('./core/gulpfile.js')(args, cwd);
+            require('./core/gulpfile.js')(argv, cwd);
         } else {
             gutil.log(gutil.colors.red('angus.config.js was not found! Please check that you are in a valid angus directory.'));
             gutil.log(gutil.colors.yellow('If you would like to create an angus application, see the ') + gutil.colors.magenta('angus create') + gutil.colors.yellow(' command.'));

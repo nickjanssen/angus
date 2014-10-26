@@ -14,6 +14,7 @@ module.exports = function (argTasks, appPath) {
     require('./buildFilePaths.js')(appConfig, appPath);
 
     var angus = {
+        'args': argTasks,
         'package': require('../package.json'),
         'appPath': appPath,
         'appName': path.basename(appPath),
@@ -76,5 +77,5 @@ module.exports = function (argTasks, appPath) {
         });
     });
 
-    gulp.start(argTasks);
+    gulp.start(argTasks._);
 };
