@@ -65,7 +65,17 @@ module.exports = function (argTasks, appPath) {
             name: 's3',
             env: 'prod',
             tags: fullBuildTags.concat(['s3'])
-        }
+        },
+        {
+            name: 'buildDev',
+            env: 'dev',
+            tags: fullBuildTags
+        },
+        {
+            name: 'buildProd',
+            env: 'prod',
+            tags: fullBuildTags
+        },
     ];
 
     tasks.forEach(function (task) {
