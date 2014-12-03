@@ -20,31 +20,32 @@ module.exports = function (angus) {
         angus.appConfig.npm.packages
             .forEach(function (pkg) {
                 var version = null;
+                var pkgName = pkg;
 
                 // Check if there is a version available
                 if (pkg.indexOf('@') !== -1 && pkg.indexOf('=') === -1) {
                     var pkgArr = pkg.split('@');
-                    pkg = pkgArr[0];
+                    pkgName = pkgArr[0];
                     version = pkgArr[1];
                 }
                 // Support for tags
                 else if (pkg.indexOf('#') !== -1 && pkg.indexOf('=') === -1) {
                     var pkgArr = pkg.split('#');
-                    pkg = pkgArr[0];
+                    pkgName = pkgArr[0];
                     version = pkgArr[1];
                 }
                 // Support for readAs packages using '='
                 else if (pkg.indexOf('=') !== -1) {
                     var pkgArr = pkg.split('=');
-                    pkg = pkgArr[0];
+                    pkgName = pkgArr[0];
                     version = pkgArr[1];
                 }
 
-                if (fs.existsSync(angus.appPath + '/node_modules/' + pkg)) {
-                    gutil.log(gutil.colors.magenta(pkg) + gutil.colors.green(' is already installed, skipping'));
+                if (fs.existsSync(angus.appPath + '/node_modules/' + pkgName)) {
+                    gutil.log(gutil.colors.magenta(pkgName) + gutil.colors.green(' is already installed, skipping'));
                 }
                 else {
-                    gutil.log(gutil.colors.yellow('Installing package ') + gutil.colors.magenta(pkg));
+                    gutil.log(gutil.colors.yellow('Installing package ') + gutil.colors.magenta(pkgName));
                     packageCommands.push('npm install ' + pkg + '');
                 }
             });
@@ -55,32 +56,33 @@ module.exports = function (angus) {
             .forEach(function (pkg) {
 
                 var version = null;
+                var pkgName = pkg;
 
                 // Check if there is a version available
                 if (pkg.indexOf('@') !== -1 && pkg.indexOf('=') === -1) {
                     var pkgArr = pkg.split('@');
-                    pkg = pkgArr[0];
+                    pkgName = pkgArr[0];
                     version = pkgArr[1];
                 }
                 // Support for tags
                 else if (pkg.indexOf('#') !== -1 && pkg.indexOf('=') === -1) {
                     var pkgArr = pkg.split('#');
-                    pkg = pkgArr[0];
+                    pkgName = pkgArr[0];
                     version = pkgArr[1];
                 }
                 // Support for readAs packages using '='
                 else if (pkg.indexOf('=') !== -1) {
                     var pkgArr = pkg.split('=');
-                    pkg = pkgArr[0];
+                    pkgName = pkgArr[0];
                     version = pkgArr[1];
                 }
 
-                if (fs.existsSync(angus.appPath + '/bower_components/' + pkg)) {
-                    gutil.log(gutil.colors.magenta(pkg) + gutil.colors.green(' is already installed, skipping'));
+                if (fs.existsSync(angus.appPath + '/bower_components/' + pkgName)) {
+                    gutil.log(gutil.colors.magenta(pkgName) + gutil.colors.green(' is already installed, skipping'));
                 }
                 else {
-                    gutil.log(gutil.colors.yellow('Installing package ') + gutil.colors.magenta(pkg));
-                    packageCommands.push('bower install ' + pkg + ' --allow-root --force-latest');
+                    gutil.log(gutil.colors.yellow('Installing package ') + gutil.colors.magenta(pkgName));
+                    packageCommands.push('bower install ' + pkg + ' --allow-root' + (!version ? ' --force-latest' : ''));
                 }
 
             });
