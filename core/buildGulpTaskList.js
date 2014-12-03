@@ -33,6 +33,10 @@ module.exports = function (angus, context) {
         taskList.push('clean');
     }
 
+    if (context.indexOf('configFileChangedWarning') !== -1) {
+        taskList.push('configFileChangedWarning');
+    }
+
     if (context.indexOf('css') !== -1) {
         if (cfg.cssCompiler === 'sass' || cfg.cssCompiler === 'less') {
             taskList.push('libStyleIncludes');
